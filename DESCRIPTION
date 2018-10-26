@@ -4,15 +4,16 @@ Title: BIOL340 Biometrics
 Version: 0.1.0
 Author: Matthew Zinkgraf
 Maintainer: Matthew Zinkgraf <matthew.zinkgraf@wwu.edu>
-Description: This is an R package meant to support the Biometrics class (BIOL340 and ESCI340) at Western Washington University.
+Description: This is an R package ment to support the Biometrics class (BIOL340 and ESCI340) at Western Washington University.
 License: GPL (>=3)
 Encoding: UTF-8
 Imports:
+    combinat,
+    fAsianOptions,
+    prob,
     plyr,
     reshape2,
-    ggplot2,
-    combinat,
-    fAsianOptions
+    ggplot2
 LazyData: TRUE
 RoxygenNote: 6.1.0
 Suggests: knitr,
