@@ -12,3 +12,11 @@ geo.mean1(x)
 \description{
 Geometric mean 1
 }
+\examples{
+#generate some data
+data <- rnorm(10)
+
+#calculate geometric mean
+geo.mean1(data)
+
+}

@@ -12,3 +12,11 @@ se(x)
 \description{
 Standard error of the mean
 }
+\examples{
+#generate some data
+data <- rnorm(10)
+
+#calculate the standard error
+se(data)
+
+}

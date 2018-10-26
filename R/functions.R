@@ -18,11 +18,11 @@
 #' @usage geo.mean1(x)
 #'
 #' @param x vector of numerical values
-#' @example
+#' @examples
 #' #generate some data
 #' data <- rnorm(10)
 #'
-#' #calculate geomtric mean
+#' #calculate geometric mean
 #' geo.mean1(data)
 #'
 #' @export
@@ -36,11 +36,11 @@ geo.mean1 <- function(x){
 #' @usage geo.mean2(x)
 #'
 #' @param x vector of numerical values
-#' @example
+#' @examples
 #' #generate some data
 #' data <- rnorm(10)
 #'
-#' #calculate geomtric mean
+#' #calculate geometric mean
 #' geo.mean2(data)
 #'
 #' @export
@@ -54,7 +54,7 @@ geo.mean2 <- function(x){
 #' @usage har.mean(x)
 #'
 #' @param x vector of numerical values
-#' @example
+#' @examples
 #' #generate some data
 #' data <- rnorm(10)
 #'
@@ -77,7 +77,7 @@ mode <- function(x){
 #' @usage se(x)
 #'
 #' @param x vector of numerical values
-#' @example
+#' @examples
 #' #generate some data
 #' data <- rnorm(10)
 #'

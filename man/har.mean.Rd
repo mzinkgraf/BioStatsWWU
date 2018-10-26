@@ -12,3 +12,11 @@ har.mean(x)
 \description{
 Harmonic mean
 }
+\examples{
+#generate some data
+data <- rnorm(10)
+
+#calculate harmonic mean
+har.mean(data)
+
+}
