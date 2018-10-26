@@ -1,11 +1,20 @@
 Package: BiometricsWWU
 Type: Package
-Title: What the Package Does (Title Case)
+Title: BIOL340 Biometrics
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Matthew Zinkgraf
+Maintainer: Matthew Zinkgraf <matthew.zinkgraf@wwu.edu>
+Description: This is an R package ment to support the Biometrics class (BIOL340 and ESCI340) at Western Washington University.
+License: GPL (>=3)
 Encoding: UTF-8
-LazyData: true
+Imports:
+    plyr,
+    reshape2,
+    ggplot2,
+    combinat,
+    fAsianOptions
+LazyData: TRUE
+RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
