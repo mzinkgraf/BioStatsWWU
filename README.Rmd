@@ -25,8 +25,12 @@ BiometricsWWU is a R package meant to help support Biometric classes (BIOL340 an
 The BiometricsWWU Package can be installed from github:
 
 ```{r, eval = F}
-# install.packages("devtools")
-devtools::install_github("mzinkgraf/BiometricsWWU")
+    #install dependencies
+    install.packages(c("devtools","prob","plyr","reshape2","ggplot2"),
+                     dependencies = TRUE)
+
+    #install BiometricsWWU
+    devtools::install_github("mzinkgraf/BiometricsWWU")
 ```
 
 ---

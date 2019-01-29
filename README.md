@@ -9,8 +9,12 @@ available on [GitHub](https://github.com/mzinkgraf/BiometricsWWU).
 The BiometricsWWU Package can be installed from github:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("mzinkgraf/BiometricsWWU")
+    #install dependencies
+    install.packages(c("devtools","prob","plyr","reshape2","ggplot2"),
+                     dependencies = TRUE)
+
+    #install BiometricsWWU
+    devtools::install_github("mzinkgraf/BiometricsWWU")
 ```
 
 ------------------------------------------------------------------------
