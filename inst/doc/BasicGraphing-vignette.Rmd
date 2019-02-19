@@ -1,0 +1,291 @@
+---
+title: "Basic Graphing"
+author: "Ben Miner and Matthew Zinkgraf"
+date: '`r Sys.Date()`'
+output:
+  html_document:
+    toc: true
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{Basic Graphing Tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteRender{all}
+---
+
+
+# Install BiometricsWWU and Dependant Packages
+
+The BiometricsWWU package can be obtainded from github and installed using `install_github()` from the devtools package. It is important to note that BiometricsWWU depends on other R packages, so please make sure they are installed before you begin. These packages include ggplot2.
+
+```{r results='hide', message=FALSE, warning=FALSE, eval=FALSE}
+    #install dependencies
+    install.packages(c("devtools","prob","plyr","reshape2","ggplot2"),
+                     dependencies = TRUE)
+
+    #install BiometricsWWU
+    require(devtools);
+    install_github("mzinkgraf/BiometricsWWU");
+```
+
+
+# Setup Environment
+
+Before you start the analysis, begin by setting up the work environment and load packages.
+
+```{r results='hide', message=FALSE, warning=FALSE}
+    require(BiometricsWWU);
+
+    #It can be helpful to make sure non-numerical
+    #data will not be coerced into factors
+    options(stringsAsFactors = FALSE);
+
+    #change working directory
+    #setwd("~/path/to/folder")
+    setwd(".")
+```
+
+To give you an idea of what you can do in R, let’s make some graphs. Basic graphing in R is very simple. Here are a couple of functions to easily generate simple graphs in R.
+
+
++-----------+---------------------------------------------------+
+| Function  | Description                                       |
++:=========:+:==================================================+
+| <b>plot   | Creates a scatterplot between two continuous      |
+|           | variables, or a boxplot between a categorical x   |
+|           | variable and continuous y variable.               |
++-----------+---------------------------------------------------+
+| <b>boxplot| Creates a boxplot.                                |
++-----------+---------------------------------------------------+
+| <b>barplot| Creates a barplot.                                |
++-----------+---------------------------------------------------+
+| <b>pie    | Creates a pie chart.                              |
++-----------+---------------------------------------------------+
+| <b>hist   | Creates a histogram of a numerical vector.        |
++-----------+---------------------------------------------------+
+
+# Create graphs
+
+Let’s open up a new script file and create a few graphs. We will create three variables: pops, height, and weight so we have something to graph. For fun, let’s assume the fake data we make up in a minute are from two populations of the species Aha ha, which is an Australian wasp (and yes that is the correct species name for this species).
+
+````{r}
+    #the function rep repeats a vector
+    #below we repeat the vector c("Pop 1", "Pop 2") 25 times
+    pops <- rep(c("Pop 1", "Pop 2"), 25)
+    
+    #converts the data to a categorical variable
+    pops.fac <- factor(pops) 
+    
+    #view the data
+    pops
+````
+
+````{r}
+    pops.fac #compare the output from pops
+````
+
+````{r}
+    #set the random number generator value so we all generate the same "random"" numbers
+    set.seed(340)  
+    #create some fake data
+    #the function rnorm returns 50 random values from
+    #a normal distribution with a mean of 66 and 
+    #standard deviation of 10
+    height <- rnorm(50, 66, 10)
+    height
+````
+
+````{r}
+    #create 50 values for a normal distribution with
+    #a mean of 150 and standard deviation of 30
+    weight <- rnorm(50, 150, 30)
+    weight
+````
+
+# Making Basic Graphs
+
+Now let’s make some graphs.
+
+## The function `plot()`
+
+````{r}
+   plot(height~weight)
+````
+
+The first argument in many plotting functions can be given as a formula. In R, a formula is similar to the how statistical models are written. The response variable is always on the left side of the equation and is plotted on the y-axis. The predictor variable is always on the right side of the equation and is plotted on the x-axis. The tilde “~”, which is in the upper left corner of your keyboard represents the equals sign in the equation. R will make decisions about what type of plot to create, based on the type of the data. For example, above the response and predictor variables are both continuous, so R plots the data as a scatterplot. Below I use the function plot again, but provide a continuous response variable and a categorical variable in the formula. R now plots a box plot. Of course you can also use the function `boxplot()` instead of the function `plot()`.
+
+````{r}
+    plot(height~pops.fac) 
+````
+
+````{r}
+    boxplot(height~pops.fac) #same as the above plot
+````
+
+## The function `barplot()`
+
+For some plots, like barplots and pie charts, you need to provide just one value of each group. In in the case of our fake data, we have two groups, female and male. However, we have lots of numbers for each group. So, we can use the function `tapply()` to quickly calculate the mean (or another metric) for each group. In the example below, we first calculate the mean heights for each group. Then we plot the means.
+
+```{r}
+    #Calculate the means
+    pop.mean.heights <- tapply(height, pops.fac, mean)
+    pop.mean.heights
+```
+
+```{r}
+    #Plot the means
+    barplot(pop.mean.heights)
+```
+
+The function to calculate the standard deviation is `sd()`. Try to modify the code in the first line above to calculate the standard deviation for populations 1 and 2. You can check you answer against the code below.
+
+```{r}
+    #Calculate the sd
+    pop.sd.heights <- tapply(height, pops.fac, sd)
+    pop.sd.heights
+```
+
+In the function `barplot()`, the argument to change the labels is names.arg and it takes a vector of strings. Make sure to put the labels in the correct order. In the example, above “Pop 1” is the first value in pop.mean.heights.
+
+```{r}
+    barplot(pop.mean.heights, names.arg = c("Population 1", "Population 2"))
+```
+
+## The function `pie()`
+
+```{r}
+    pop.mean.weights <- tapply(weight, pops.fac, mean)
+    pie(pop.mean.weights)
+```
+
+In the function `pie()`, the argument to change the labels is label and it takes a vector of strings. Make sure to put the labels in the correct order. In the example, above “Pop 1” is the first value in pop.mean.heights.
+
+```{r}
+    pie(pop.mean.weights, label = c("Population 1", "Populations 2"))
+```
+
+You might be wondering how to add error bars. Check out the Advance Graphing lab for information about error bars.
+
+## The function `hist()`
+
+In the function `hist()`, only one argument is required to create a histogram–a numerical vector. There are optional arguments to change to the breaks and other aspects of the histogram.
+
+```{r}
+    hist(weight)
+```
+
+```{r}
+    hist(weight)
+```
+
+# Modify graphs
+
+Now let’s spruce up the graphs a little. There are additional arguments to modify the graphs. Many of these arguments are general and can be used with any of the functions above.
+
+
++----------------------------+---------------------------------------------------+
+| Option                     | Description                                       |
++:==========================:+:==================================================+
+| <b>main                    | Specifies the title of the graph.                 |
++----------------------------+---------------------------------------------------+
+| <b>sub                     | Specifies the subtitle of the graph.              |
++----------------------------+---------------------------------------------------+
+| <b>xlab ylab               | Specifies the axis labels.                        |
++----------------------------+---------------------------------------------------+
+| <b>xlim ylim               | Specifies the axis limits.                        |
++----------------------------+---------------------------------------------------+
+| <b>col                     |  Specifies the color of the graph.                |
++----------------------------+---------------------------------------------------+
+| <b>pch                     |   Specifies the symbol of the points on the graph.|
++----------------------------+---------------------------------------------------+
+| <b>cex, cex.axis, cex.main | Specifies the size of the points                  |
+|                            | or text in the graph. A value of greater than 1   |
+|                            | increases the size.                               |
++----------------------------+---------------------------------------------------+
+| <b>asp                     |    Specifies the y/x aspect ratio of a plot.      |
++----------------------------+---------------------------------------------------+
+
+```{r}
+    plot(height~weight, main = "My Sweet Graph", sub = "Created by Ben")
+```
+
+Change the axis labels with the xlab and ylab arguments.
+
+```{r}
+    plot(height~weight, 
+       main = "My Sweet Graph", 
+       xlab = "Weight (mg)", 
+       ylab = "Height (mm)")
+```
+
+Change the size of symbols, axes, and axis labels with the cex, cex.axis, cex.lab, and cex.main arguments.
+
+```{r}
+    plot(height~weight, 
+       main = "My Sweet Graph", 
+       xlab = "Weight (mg)",
+       ylab = "Height (mm)",
+       cex = 1.5, cex.axis = 1.5, cex.lab = 1.5, cex.main = 1.5)
+```
+
+Change the type and color of the symbols with the pch and col arguments.
+
+#makehighlightbox
+Use the function `colors()`, which requires no arguments, to see all the built-in colors in R.
+
+```{r}
+    plot(height~weight, 
+       main = "My Sweet Graph", 
+       xlab = "Weight (mg)",
+       ylab = "Height (mm)",
+       cex = 1.5, cex.axis = 1.5, cex.lab = 1.5, cex.main = 1.5,
+       pch = 15, col = "goldenrod3")
+```
+
+Change the scale of the axes with the xlim and ylim arguments.
+
+```{r}
+    plot(height~weight, 
+       main = "My Sweet Graph", 
+       xlab = "Weight (mg)",
+       ylab = "Height (mm)",
+       cex = 1.5, cex.axis = 1.5, cex.lab = 1.5, cex.main = 1.5,
+       pch = 15, col = "goldenrod3",
+       xlim = c(0,500), ylim = c(0,100))
+```
+
+#highlightbox
+For more arguments that modify graphics, type in ?par, which represents the parameters for graphics. There are a lot, and it is overwhelming at first, but you will start to become comfortable with many of these arguments.
+
+# Save Graphs
+
+You might also want to save a graph for a class assignment, presentation, or publication. In R, there are drivers that create a file of your graph (e.g., jpg, bmp, pdf, or png file). There are two functions I commonly use to save graphs, `pdf()` and `png()`. Each driver function has slightly different parameters, so look at the help files to see what options are available.
+
+First, let’s tell R where to save the file, by setting the working directory with the function `setwd()`. Alternatively, in RStudio, you can go to Session > Set Working Directory > Choose File. Of course you welcome to set the working directory somewhere other than you u drive.
+
+```{r results='hide', message=FALSE, warning=FALSE, eval=FALSE}
+    getwd()       #indicates where the file will be saved
+    setwd("u:/")  #sets the working directory to your u drive 
+```
+
+Now let’s create a pdf. First, we turn on the pdf driver with the function pdf() and use the arguments paper to set the paper size and pointsize to set the font size. The first argument is the name you want to assign to the file, and it includes the extension and is surrounded by quotes. At the end we turn off the driver with `dev.off()`.
+
+```{r results='hide', message=FALSE, warning=FALSE, eval=FALSE}
+pdf("my first graph.pdf", paper = "letter", pointsize = 12)
+plot(height~weight, 
+   main = "My Sweet Graph", 
+   xlab = "Weight (mg)",
+   ylab = "Height (mm)",
+   cex = 1.5, cex.axis = 1.5, cex.lab = 1.5, cex.main = 1.5,
+   pch = 15, col = "goldenrod3",
+   xlim = c(0,500), ylim = c(0,100))
+dev.off()
+```
+
+Look in the working directory and open your new graph. You are now officially a nerd!!
+
+So, that is it for the introduction. Check out the Advanced Graphing and GGPlots labs for more information about how to create graphs in R.
+
+
+
+
