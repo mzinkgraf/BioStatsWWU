@@ -1,18 +1,18 @@
 ---
-title: "Basic Graphings"
-author: "Matthew Zinkgraf"
+title: "Basic Graphing"
+author: "Ben Miner and Matthew Zinkgraf"
 date: '`r Sys.Date()`'
 output:
   html_document:
-    number_sections: yes
-    toc: yes
+    toc: true
+    number_sections: true
 vignette: >
   %\VignetteIndexEntry{Basic Graphing Tutorial}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteRender{all}
 ---
 
-This vignette provides a detail workflow on how to carry out an Orthologous Clustering approach to identify conserved and lineage specific co-expressed gene modules. In addition, we illustrate various aspects of data manipulation, filtering and visualization of large transcriptomic experiments.
 
 # Install BiometricsWWU and Dependant Packages
 
@@ -41,6 +41,7 @@ Before you start the analysis, begin by setting up the work environment and load
     options(stringsAsFactors = FALSE);
 
     #change working directory
+    #setwd("~/path/to/folder")
     setwd(".")
 ```
 
@@ -62,7 +63,6 @@ To give you an idea of what you can do in R, let’s make some graphs. Basic gra
 +-----------+---------------------------------------------------+
 | <b>hist   | Creates a histogram of a numerical vector.        |
 +-----------+---------------------------------------------------+
-
 
 # Create graphs
 
@@ -102,9 +102,11 @@ Let’s open up a new script file and create a few graphs. We will create three 
     weight
 ````
 
+# Making Basic Graphs
+
 Now let’s make some graphs.
 
-# The function `plot()`
+## The function `plot()`
 
 ````{r}
    plot(height~weight)
@@ -120,7 +122,7 @@ The first argument in many plotting functions can be given as a formula. In R, a
     boxplot(height~pops.fac) #same as the above plot
 ````
 
-# The function `barplot()`
+## The function `barplot()`
 
 For some plots, like barplots and pie charts, you need to provide just one value of each group. In in the case of our fake data, we have two groups, female and male. However, we have lots of numbers for each group. So, we can use the function `tapply()` to quickly calculate the mean (or another metric) for each group. In the example below, we first calculate the mean heights for each group. Then we plot the means.
 
@@ -149,7 +151,7 @@ In the function `barplot()`, the argument to change the labels is names.arg and 
     barplot(pop.mean.heights, names.arg = c("Population 1", "Population 2"))
 ```
 
-# The function `pie()`
+## The function `pie()`
 
 ```{r}
     pop.mean.weights <- tapply(weight, pops.fac, mean)
@@ -164,7 +166,7 @@ In the function `pie()`, the argument to change the labels is label and it takes
 
 You might be wondering how to add error bars. Check out the Advance Graphing lab for information about error bars.
 
-# The function `hist()`
+## The function `hist()`
 
 In the function `hist()`, only one argument is required to create a histogram–a numerical vector. There are optional arguments to change to the breaks and other aspects of the histogram.
 
