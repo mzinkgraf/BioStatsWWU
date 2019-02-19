@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 # BiometricsWWU
 
-BiometricsWWU is a R package meant to help support Biometric classes (BIOL340 and ESCI340) at Western Washington University (WWU) and is available on [GitHub](https://github.com/mzinkgraf/BiometricsWWU).
+BiometricsWWU is a R package meant to help support Biometrics classes (BIOL340 and ESCI340) at Western Washington University (WWU) and is available on [GitHub](https://github.com/mzinkgraf/BiometricsWWU).
 
 The BiometricsWWU Package can be installed from github:
 

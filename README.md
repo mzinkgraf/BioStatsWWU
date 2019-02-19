@@ -2,7 +2,7 @@
 BiometricsWWU
 =============
 
-BiometricsWWU is a R package meant to help support Biometric classes
+BiometricsWWU is a R package meant to help support Biometrics classes
 (BIOL340 and ESCI340) at Western Washington University (WWU) and is
 available on [GitHub](https://github.com/mzinkgraf/BiometricsWWU).
 
