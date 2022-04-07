@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<link href="libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<div class="panel panel-primary">
+<div class="panel-body">
+<h3>
+Week 1
+</h3>
+<p>Intro to R <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/intro_R.html">Intro to R</a> <br> Graphing <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/BasicGraphing.html">Basic Graphing</a></p>
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-body">
+<h3>
+Week 2
+</h3>
+Intro to R <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/data_types.html">Data Types</a> <br> Intro to R <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/input_R.html">Inputting Data</a> <br> Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/des_stats.html">Descriptive Stats</a> <br> Graphing <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/BasicGraphing.html">Basic Graphing</a>
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-body">
+<h3>
+Week 3
+</h3>
+Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/des_stats.html">Descriptive Stats</a> <br> Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/basic_prob.html">Basic Probability</a>
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-body">
+<h3>
+Week 4
+</h3>
+Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/basic_prob.html">Basic Probability</a> <br> Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/prob_dist.html">Probability Distributions</a> <br> Graphing <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/adv_graphing.html">Advanced Graphing</a>
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-body">
+<h3>
+Week 5
+</h3>
+<p>Midterm</p>
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-body">
+<h3>
+Week 6
+</h3>
+Statistical Tests <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/chi_good_test.html">Chi-squared goodness-of-fit test</a> <br> Statistical Tests <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/chi_conti_test.html">Chi-squared contingency test</a>
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-body">
+<h3>
+Week 7
+</h3>
+Statistical Tests <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/t_test.html">t tests</a>
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-body">
+<h3>
+Week 8
+</h3>
+Statistical Tests <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/anova.html">ANOVA</a>
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-body">
+<h3>
+Week 9
+</h3>
+<p>Statistical Tests <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/reg_corr_test.html">Regression and correlation</a></p>
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-body">
+<h3>
+Week 10
+</h3>
+Graphing <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/ggplots.html">ggplots2</a>
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-body">
+<h3>
+Other Resources</h3>
+Help <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/R_websites.html">Helpful Websites</a> <br> Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/functions.html">Functions</a> <br> Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/packages.html">Packages</a> <br> Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="../../../library/BiometricsWWU/doc/plyr.html">plyr</a>
+</div>
+</div>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

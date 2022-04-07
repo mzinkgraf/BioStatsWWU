@@ -1,0 +1,88 @@
+---
+title: "Packages"
+author: "Ben Miner and Matthew Zinkgraf"
+date: '`r Sys.Date()`'
+output:
+  html_document:
+    toc: true
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{Packages}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteRender{all}
+---
+
+<h1>Installing and Loading Packages</h1>
+
+In R, you can load additional packages.  These packages include functions that allow you to do all kinds of amazing things.  You can use the function <samp>library()</samp> without any arguments to see what packages are currently installed on your computer.  Some of these packages will already be loaded, but some are not.  In RStudio, you can also just click on the Packages tab in the lower-right window to see which packages are install on your computer, and which are loaded.  Loaded packages have a check to the left of the name of the package.  Below I will guide you through installing and loading packages in R.  
+
+<div class="alert alert-info" role="alert">
+  If a package is not installed on your computer, then you first need to <b>install</b> it.  You only need to install a package once.  You need to <b>load</b> a package each time you start R.  
+</div>
+
+# Installing Packages
+
+If a package is not installed on your computer, then you need to install it.  This means downloading the package and copying files to a folder on your computer where R can access them.  R makes this very easy.  
+
+If you own your computer or have administration access, then it is a piece of cake.  Just use the function <samp>install.packages()</samp> to install the package.  Of course you need to know the name of package.  Below is the code to install the <samp>ggplot2</samp>, which includes a bunch of functions to create all kinds of graphs. I have included a second argument called <samp>dependencies=T</samp> because I want R to also download and install any packages needed to run the ggplot2 package.    
+
+```{r, eval=FALSE}
+  install.packages("ggplot2", dependencies=T)
+```
+
+If you don't have administration access, for example you are using a school computer, then you need to also tell R where to copy the files for the package.  This too is easy.  The example below copies the files to your u drive, and should work on any school computer.  
+
+```{r, eval=FALSE}
+install.packages("ggplot2", lib="u:/", dependencies=T)
+```
+
+In RStudio, you can just go to the Packages tab in the lower-right window and click the Install button on the left side just below the tabs.  You can then provide the information in the form that pops up.  Don't forget to check the Install dependencies checkbox.  If you are on a school computer, then make sure to set the path to your u drive in the Install to Library dropdown box.  
+
+
+# Loading Packages
+
+Now that your package is installed, you can load it and access the functions and help files in that package.  There are two functions <samp>library()</samp> and <samp>require()</samp> that load a package into a session of R.  If you have administration access then you just need to provide either <samp>library()</samp> or <samp>require()</samp> with the name of the package.  If you don't have adminstration access then you need to provide a second argument with the location so that R can find the package.  
+
+<div class="alert alert-info" role="alert">
+  You need to <b>load</b> a package each time you start R.  
+</div>
+
+```{r, eval=FALSE}
+#If you have admin access
+library("ggplot2")
+require("ggplot2")
+
+#If you don't have admin access
+#And install the package to your u drive
+library("ggplot2", lib.loc="u:/")
+require("ggplot2", lib.loc="u:/")
+```
+
+That is it.  You can now use the ggplot2 package.  There are thousands of packages that you can install and load (all free!).  I will try and add a list of some useful packages soon.  
+
+<h2>Some useful packages</h2>
+Below is a short list of packages that I use often.  
+
+<dl class="dl-horizontal">
+  <dt>plyr, dplyr, and tidyr</dt>
+  <dd>Helps store and manipulate data.frames.</dd>
+  <dt>readxl</dt>
+  <dd>Imports Excel files into R.</dd>
+  <dt>ggplot2</dt>
+  <dd>Creates graphs.</dd>
+  <dt>ggmap</dt>
+  <dd>Creates maps that display data.</dd>
+  <dt>RColorBrewer</dt>
+  <dd>Color palettes created by color scientists.</dd>
+  <dt>Cairo</dt>
+  <dd>Saves graphs as high-quality image or pdf files.</dd>
+  <dt>stringr</dt>
+  <dd>Manipulates strings.</dd>
+  <dt>rmarkdown</dt>
+  <dd>Creates documents that includes r code and graphics.</dd>
+  <dt>shiny</dt>
+  <dd>Creates interactive webpages.</dd>
+</dl>
+
+

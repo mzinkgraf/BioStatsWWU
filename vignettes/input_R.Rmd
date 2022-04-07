@@ -1,0 +1,180 @@
+---
+title: "Inputting Data"
+author: "Ben Miner and Matthew Zinkgraf"
+date: '`r Sys.Date()`'
+output:
+  html_document:
+    toc: true
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{Week 2: Inputting Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteRender{all}
+---
+
+<h1>Inputting Data into R</h1>
+There are many ways to input data into R.  Below are examples of the most common ways.  
+
+# By hand
+This method is slow, and will only work for very small datasets.  The functions, <samp>c()</samp>, <samp>factor()</samp>, <samp>gl()</samp>, and <samp>data.frame()</samp> are the most commonly used to enter data, and can be used in combination.  
+
+```{r}
+my.data <- c(4.5, 56, 78, 34, 5, 7)
+my.fac <- factor(rep(c("Low", "High"), each=3))
+my.fac2 <- gl(2, 3, labels = c("Low", "High")) #Same as my.fac
+(my.frame <- data.frame(my.data, my.fac))
+#Enter data and create the data.frame at once by nesting functions
+#rnorm() and gl() are "inside" data.frame()
+(my.frame2 <- data.frame(my.data = rnorm(6), my.factor = gl(2, 3))) 
+```
+
+R does have some minimal user interface features.  One is a
+spreadsheet-like interface to enter or modify data in data.frames.
+To bring up this interface use the function <samp>edit()</samp>, where
+the data.frame of interest is the argument.  For example,
+let's modify the data in <samp>my.frame</samp>.
+
+```{r eval=FALSE}
+(my.frame.v2 <- edit(my.frame)) #Change the 1st value to 13
+```
+
+It is important to remember that you must assign a name to <samp>edit</samp>, or the changes are lost.  
+
+If you want to enter your data from scratch with this interface, use
+the following code.
+
+```{r eval=F}
+ben.frame.v3 <- edit(data.frame())
+```
+
+<div class="alert alert-warning">
+  If you have a Mac, the function <samp>edit()</samp> might not work because Apple got rid of X11 devices.  You can download X11 at the following website, which should fix the problem.
+</div>
+
+<a href="http://xquartz.macosforge.org/landing/">http://xquartz.macosforge.org/landing/</a>
+
+# Import Data
+## Copy and paste data with scan()
+Typically we don't want to enter data by hand, especially if it is already saved in Excel or another spreadsheet program.  Below are a couple of common ways to import data.  
+
+The function <samp>scan()</samp> is a quick way to import data as vectors.  Copy a row or column of numbers from Excel.  Then go to R and type the following.
+
+```{r eval=F}
+my.import <- scan()
+```
+
+Hit return, then "ctr v" to paste the values, and lastly hit return.  Your data are now saved as <samp>my.import</samp>.  
+
+## Auto import with read.csv()
+The most common way people import data into R is with the functions <samp>read.table</samp> or <samp>read.csv</samp>.  We will use the latter and import data that was entered into Excel, but saved as a csv.  Create a data set in Excel.  Save the file as a csv
+text file.  Make sure to note where you saved the file.  Set the
+working directory in R to where you just saved the file with the
+function <samp>setwd()</samp>, or by going to the "File" menu when the
+workspace is active and selecting "Change dir...". If you use the
+function <samp>setwd()</samp>, then you need to change the "\\" to
+"\\\\" or "/". You can double check to see if the working directory
+is now set to the correct location with the function
+<samp>getwd()</samp>.
+
+Below I set the working directory, where R will look for a file in the folder minerb2 that is located in my user folder on the c drive.    
+
+```{r eval=FALSE}
+setwd("c:/users/minerb2")  #or
+setwd("c:\\users\\minerb2")
+getwd()
+```
+
+Now that the working directory is set, you can read in the file. Use
+the function <samp>read.csv()</samp>.  The only required argument is the file
+name with the extension surrounded with quotes.  That is it!  Below is an example of the file I read in.  Notice the first and only
+argument is the complete file name surrounded by quotes.  However, there are other arguments that allow more options when importing a file.  See the help <samp>?read.csv</samp> for more information.  Another helpful function is <samp>dir()</samp>, which will print out all the file names in the working directory.  If you cannot remember the spelling of the name of your file, then you can use <samp>dir()</samp> to look it up.  
+
+
+```{r}
+#dir()
+(ben.data <- read.csv("../inst/extdata/lengthdata.csv"))
+```
+
+You can now check the structure of your data with the function <samp>str()</samp> or summarize your data with the function <samp>summary()</samp>.  If you want to just see the first six or last six rows of data in your data.frame, then use the functions <samp>head()</samp> and <samp>tail()</samp>
+
+```{r}
+str(ben.data)
+summary(ben.data)
+head(ben.data)
+tail(ben.data)
+```
+
+Look at the help file for <samp>read.csv</samp> for other built-in functions, like <samp>read.table</samp>.  
+## Auto import Excel files
+The new package <samp>readxl</samp> allows you to directly read in data from Excel.  This package works great, but because it is new you rarely see examples using it.  You will find lots of examples of users importing data with <samp>read.csv()</samp>.  However, this is rapidly changing, and you will want to practice reading data directly from Excel.  For example, I typically now just read in data directly from Excel--in the past I used the above methods and converted an Excel file to a csv file and imported the csv file.  You will need to install and then load the package <samp>readxl</samp> before you can use the <samp>read_excel()</samp> or <samp>excel_sheets</samp> functions.  See the page on installing packages for instructions (it is easy).  
+
+```{r}
+#install.packages(readxl) #Only needed if the package is not installed
+library(readxl)
+(ben.data2 <- read_excel("../inst/extdata/lengthdata.xlsx")) #Same as ben.data
+#View the names of the sheets in an excel file
+excel_sheets("../inst/extdata/lengthdata.xlsx")
+```
+
+You can see that there is just one sheet, which is named "Data", in the Excel file <samp>lengthdata.xlsx</samp>.  
+
+# Retrieving Data
+Now that we have imported data into R in the form of a data.frame, we can pull out specific data, like all the data in a column.  There
+are two ways to do this.  Use single hard brackets to tell R you want a part of the object and within the bracket type the number (or vector of numbers) for the rows or columns you want to retrieve or type
+the name of the column surrounded with quotes (assuming it has a
+name).  Double hard brackets strips out just the data and removes the column name.  For a data.frame, which has rows and columns, you need to provide information about which rows and columns you want.  For example
+
+```{r}
+ben.data[, 2] #No rows were requests so R returns all rows from column 2
+ben.data[, -2] #All columns except the second
+ben.data[1:3, 1] #Rows 1 through 3 in column 1
+ben.data["Salinity"]
+ben.data[["Salinity"]]
+```
+
+Alternatively you can use the name of the data.frame followed by a
+<samp>$</samp> and then the name of the column without quotes.  For
+example
+
+```{r}
+ben.data$Salinity
+```
+
+This second option is typically the clearest.  I almost always use the dollar sign to pull data out of data.frames.  
+
+Here are a few more advanced options for selecting data.  Think about what the results should look like before you run the code (the results are below).  Remember that my data.frame is called <samp>ben.data</samp> and the column names are "Length" and "Salinity".
+
+```{r}
+#Just to remind you of the data in ben.data
+ben.data
+```
+
+```{r eval=FALSE}
+ben.data$Length[4:7]
+ben.data$Length[ben.data$Length > 5]
+ben.data$Salinity[ben.data$Length > 5]
+ben.data$Length[ben.data$Salinity == "High"]
+ben.data$Length[ben.data$Salinity == "Low"]
+ben.data$Length[ben.data$Salinity != "Low"]
+```
+
+```{r echo=FALSE}
+ben.data$Length[4:7]
+ben.data$Length[ben.data$Length > 5]
+ben.data$Salinity[ben.data$Length > 5]
+ben.data$Length[ben.data$Salinity == "High"]
+ben.data$Length[ben.data$Salinity == "Low"]
+ben.data$Length[ben.data$Salinity != "Low"]
+```
+
+# Data already in R
+
+There are lots of datasets already loaded in R.  Use the function <samp>data()</samp>, which requires no arguments, to return a list and descriptions of the all the datasets available.  If you want to use one of these datasets, then type in the name of the dataset.  I will assign the preloaded datasets to a new object name, so I can modify the data if needed.  
+
+```{r}
+data() #Shows you all the pre-loaded datasets
+mtcars #Shows the data in the mtcars dataset
+carData <- mtcars #Assigns the mtcars dataset to the name carData
+head(carData)
+```

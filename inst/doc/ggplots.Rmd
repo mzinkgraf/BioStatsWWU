@@ -1,0 +1,445 @@
+---
+title: "GGplot Graphing"
+author: "Ben Miner and Matthew Zinkgraf"
+date: '`r Sys.Date()`'
+output:
+  html_document:
+    toc: true
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{Week 10: GGplot Graphing}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteRender{all}
+---
+
+<h1>Graphing packages</h1>
+
+There are many additional packages to help you visualize data.  However, there are two that are widely used.  The package <samp>lattice</samp> comes with the base distribution and has been around for a while.  The package <samp>ggplot2</samp> is a newer package, and most people that are learning R find it easier to use.  Both are very powerful, but we will focus on <samp>ggplot2</samp> today.  
+
+# <samp>ggplot2</samp>
+
+The <samp>ggplot2</samp> package has a bunch of functions that allow you to create just about any type of graph, and quickly create complex graphs.  Today we will go over some of the basics with a few more advanced examples to illustrate what is possible with the package.  
+
+You need to install and load <samp>ggplot2</samp>.  If you don't remember how to do this, you can look at the lab about installing and loading packages.  
+
+```{r, eval=-1}
+install.packages(ggplot2)
+require(ggplot2)
+```
+
+
+
+The way we create plots is a little different than what you have learned for the low- and high-level plotting functions in the base package.  Below is a table with some general definitions of important terminology.  
+
+<dl class="dl-horizontal">
+  <dt>Aesthetics</dt>
+  <dd>These are the data associated with the plot. For example, what data.frame do you want to use, what variable do you want plotted on the x and y axis, what variable to want to represent some other aspect of the graph, like size or color of points.</dd>
+  <dt>Geoms</dt>
+  <dd>Specifies what you want to plot.  There are geoms for just about anything you would likely plot. For example, there is a geom for points, another for lines, another for bars, etc.</dd>
+  <dt>Statistics</dt>
+  <dd>Specifies how the data should be summarized before they are plotted.  For example, for a histogram the default statistic is to bin the data; for points the default statistic is identity, which means to just plot the raw data.</dd>
+  <dt>Scales</dt>
+  <dd>Specifies how to scale the data.  For example, you can make the points on a graph differ in color or in size, and the colors or sizes are set by scales.</dd>
+  <dt>Coordinate systems</dt>
+  <dd>Specifies the numbers represented on the axes.  You probably won't need to change the cooridinate system. However, if you need to, then you can.</dd>
+  <dt>Facets</dt>
+  <dd>Specifies how to create multiple graphs from a dataset.  For example, if you have many sites and want to create a graph of each site, then you can use facets.</dd>
+  <dt>Themes</dt>
+  <dd>Specifies the formating of a plot.  For example, if you want to change the background color, the font, the size of the axis label, etc.</dd>
+</dl>
+<br />
+
+Now to create a plot with the function <samp>ggplot2()</samp>, R need to know the aesthetic, geom, statistic, scale, facet, and theme to use.  However, there are excellent defaults so you typically need to specify only a few of these.  At a minimum you need to give the aesthetic (aes), but often you will also specify a geom.  
+
+I recommend that you quickly look at the <a href="http://docs.ggplot2.org/current/">ggplot2 webpage</a> to see some of the different options for each of these general groups.  
+
+# Basic plot
+
+Let's start with a basic graph. The next few examples will introduce you to the basics of building plots with ggplot2.  Basics plots are easy to create, and the code will look a lot like what you have learned to date.  We will start with the function <samp>qplot()</samp>, which is short for quick plot.  This function creates a plot that is a very similar to the function <samp>plot()</samp>.  
+
+We will use the data found in the <samp>movies</samp> dataset that is the package <samp>ggplot2movies</samp>.  
+
+```{r, eval =-1}
+install.packages(ggplot2movies)
+require(ggplot2movies) #Don't forget that you have to install the package!
+data(movies)
+str(movies)
+```
+
+Let's make a plot to see if there is a relationship between the length of a movie and its rating.  
+
+```{r, fig.align='center'}
+qplot(x = budget, y = rating, data = movies)
+```
+
+Notice the warnings.  The programmers were nice enough to tell us that points were removed and why. I have supressed the warnings for the the rest of the lab.   
+
+How about the relationship between budget and year?
+
+```{r, fig.align='center', warning=F}
+qplot(year, budget, data = movies)
+```
+
+As you can see, it is easy to make basic plots.  Now let's see how to spruce up our graph.  Good news, most of the arguments are ones you have learned.  
+
+```{r, fig.align='center', warning=F}
+qplot(year, budget, data = movies, 
+    ylim = c(0, 100000000), #Set upper limit at 100 million dollars
+    main = "Movies are now expensive!",
+    xlab = "Year movie was released",
+    ylab = "Total budget (US dollars)"
+)
+```
+
+If you only give the function <samp>qplot()</samp> one variable, then it will create a histogram.  
+
+```{r, fig.align='center', warning=F}
+qplot(year, data = movies)
+```
+
+Look at the help file of the function <samp>qplot()</samp> to see some of the other arguments that you can set.  
+
+Now let's get serious, because you can do all of this with the functions in the base packages.  The function <samp>ggplot()</samp> is what really creates a graph, and <samp>qplot()</samp> is just a wrapper to quickly create simple graphs.  In other words, <samp>qplot()</samp> just passes the arguments to <samp>ggplot()</samp>, which really creates the graph.  
+
+So, let start to use the function <samp>ggplot()</samp>.  Now we will see how the definitions we first went over come into play.  So, let's create the same graph as above but with <samp>ggplot()</samp>.
+
+```{r, fig.align='center', warning=F}
+ggplot(movies, aes(x = year, y = budget)) + geom_point()
+```
+
+Notice that we first specified the data, which is the first argument in <samp>ggplot()</samp>, and then the aesthetics (aes).  We then added (+) the geom <samp>geo_point()</samp>.  We can now easily ask ggplot to make a more complex graph.  For example, let's make the color of each point correspond to the mpaa rating.  
+
+```{r, fig.align='center', warning=F}
+ggplot(movies, aes(x = year, y = budget, colour = mpaa)) + geom_point()
+```
+
+
+Let's change the color scale of mpaa.  
+
+```{r, fig.align='center', warning=F}
+ggplot(movies, aes(x = year, y = budget, colour = mpaa)) + 
+  geom_point() + 
+  scale_colour_brewer()
+```
+
+We can also change the size of each point, and let's make this represent average viewers' rating.
+
+```{r, fig.align='center', warning=F}
+ggplot(movies, aes(x = year, y = budget, colour = mpaa, size = rating)) + 
+  geom_point() + 
+  scale_colour_brewer()
+```
+
+We have alot of data and the plot is very busy.  So, let's create facets for mpaa, so that we see a graph for each mpaa.  In addition, let's indicate the different rating with color (and we will use the default scale), and not size.  
+
+```{r, fig.align='center', warning=F}
+ggplot(movies, aes(x = year, y = budget, color = rating)) + 
+  geom_point() + 
+  facet_wrap(~ mpaa)
+```
+
+Now let's change the theme of the plot.  There are several "pre-defined" themes that you can use. The default is <samp>theme_grey()</samp>.  You can find lots of information about themes at the <a href="http://docs.ggplot2.org/dev/vignettes/themes.html">ggplot2 website</a>. Below I just the predefined theme <samp>theme_miminal()</samp> and the argument 16 specifies the font size.  
+
+```{r, fig.align='center', warning=F}
+ggplot(movies, aes(x = year, y = budget, color = rating)) + 
+  geom_point() + 
+  facet_wrap(~ mpaa) +
+  theme_minimal(16)
+```
+
+You can change just about anything on the graph with the function <samp>theme()</samp>.  Below is an example of customizing the background and grid lines. 
+
+```{r, fig.align='center', warning=F}
+ggplot(movies, aes(x = year, y = budget, color = rating)) + 
+  geom_point() + 
+  facet_wrap(~ mpaa) +
+  theme(
+    panel.background = element_rect(fill = "white"), 
+    panel.grid.major = element_line(colour = "lightgrey")
+  )
+```
+
+Look at the <a href="http://docs.ggplot2.org/current/theme.html"><samp>theme</samp> webpage</a> to see all the things you can change about the appearance of the graph.  
+
+You can create custom themes and then use these themes later.  Here is just a short example of a theme.  
+
+```{r, fig.align='center', warning=FALSE}
+myTheme <- theme(
+    panel.background = element_rect(fill = "white"), 
+    panel.grid.major = element_line(colour = "lightgrey"),
+    strip.background = element_rect(fill = "steelblue"),
+    strip.text = element_text(color = "white"),
+    axis.text = element_text(color = "black")
+)
+
+ggplot(movies, aes(x = year, y = budget, color = rating)) + 
+  geom_point() + 
+  facet_wrap(~ mpaa) +
+  myTheme
+```
+
+There is a package <samp>ggthemes</samp> that has some pre-defined themes.  Look at the <a href="https://github.com/jrnold/ggthemes">ggthemes webpage</a> for more information.  Below are a couple examples.
+
+```{r, fig.align='center', eval=-1, warning=F}
+#install.packages(ggthemes)
+require(ggthemes)
+
+ggplot(movies, aes(x = year, y = budget, color = rating)) + 
+  geom_point() + 
+  facet_wrap(~ mpaa) +
+  theme_tufte()
+
+ggplot(movies, aes(x = year, y = budget, color = rating)) + 
+  geom_point() + 
+  facet_wrap(~ mpaa) +
+  theme_few()
+
+#This one is ugly!!
+ggplot(movies, aes(x = year, y = budget, color = rating)) + 
+  geom_point() + 
+  facet_wrap(~ mpaa) +
+  theme_excel()
+```
+
+# Geoms
+
+Let's look at some of the other geoms.  I am going to use the <samp>iris</samp> dataset because it has fewer data without missing values.  
+
+```{r, fig.align='center'}
+data(iris)
+```
+
+## <samp>geom_boxplot</samp>
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Species, y = Sepal.Length)) +
+  geom_boxplot()
+```
+
+## <samp>geom_bar</samp>
+
+I change the default stat so that it calculates the mean for each species.  
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Species, y = Sepal.Length)) +
+  geom_bar(stat = "summary", fun.y = "mean")
+```
+
+## <samp>geom_bar</samp>
+
+Now I add error bars to the graph showing the min and max, and make the bars orange.   
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Species, y = Sepal.Length)) +
+  geom_bar(stat = "summary", fun.y = mean, fill = "orange") +
+  geom_errorbar(stat = "summary", fun.ymin = min, fun.ymax = max)
+```
+
+## <samp>geom_crossbar</samp>
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Species, y = Sepal.Length)) +
+  geom_crossbar(stat = "summary", fun.y = mean, fun.ymin = min, fun.ymax = max, fill = "pink") 
+```
+
+## <samp>geom_violin</samp>
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Species, y = Sepal.Length)) +
+  geom_violin(fill = "seagreen") 
+```
+
+## <samp>geom_text</samp>
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Species, y = Sepal.Length)) +
+  geom_violin(fill = "seagreen") +
+  geom_text(x = 1, y = 7.5, label = "Testing 1, 2, 3...")
+
+#Use it to label each point
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, label = Species)) +
+  geom_text() 
+```
+
+# Stats
+
+We just saw several examples were the stats were either implicitly set because we used the default settings or explicitly set by an argument within a geom.  We can also do the opposite.  That is, call a stat and either use the default geom or set one explicitly.  Of course we always have to included the aesthetics.    
+
+## <samp>stat_summary</samp>
+
+This is a very useful stat because you can use lots of different functions to plot data.  Below are a few examples.  First, I use the argument <samp>fun.data</samp> when the function computes multiple values (e.g., the mean and standard error).    
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Species, y = Sepal.Width)) +
+  stat_summary(fun.data = "mean_se")
+```
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Species, y = Sepal.Width)) +
+  geom_point(colour = "lightgrey") +
+  stat_summary(fun.y = "median", colour = "orange", geom = "point") +
+  stat_summary(fun.y = "mean", colour = "springgreen4", geom = "point")
+```
+
+## <samp>stat_smooth</samp>
+
+There are other stats also.  For example, add line of best fit and the standard error for the slope.  
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length)) +
+  geom_point() +
+  stat_smooth(method="lm")
+```
+
+# Scales
+Scales affect how the data are presented.  For example, you use scales to specify the colors, size, or line type associated with a particular variable. Below are a few examples.  
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+  geom_point() +
+  scale_color_brewer(palette = 10)
+```
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Petal.Length)) +
+  geom_point() +
+  scale_colour_gradient(low = "pink", high = "darkorchid4")
+```
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, size = Petal.Length)) +
+  geom_point() +
+  scale_size_area(max_size = 4)
+```
+
+Below we use the default scales for shape, to specify the shape of the symbols, and linetype, to specify the style of lines. 
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, shape = Species, linetype = Species)) +
+  geom_point() +
+  stat_smooth(method = "lm", se = F)
+```
+
+# Coordinates
+
+Coordinates change the plotting coordinates on a graph.  Typically you will not need to change the coordinate system, but the different scales provide ways to change the look of a graph or create different types of graphs.  You will typically just use Cartesian coordinates when making graphs.  However there are a few coords, like <samp>coord_flip()</samp>, <samp>coord_fixed()</samp>, and <samp>coord_trans()</samp>, that you can use to easily modify Cartesian coordinates.  
+
+## coord_flip
+I am sure you guessed that <samp>coord_flip()<samp> just flips the x and y axis of a plot.  It is most commonly used to create a horizontal barplot.  
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Species, y = Petal.Length)) +
+  geom_bar(stat = "summary", fun.y = mean, fill = "bisque", col = "orange")
+```
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Species, y = Petal.Length)) +
+  geom_bar(stat = "summary", fun.y = mean, fill = "bisque", col = "orange") +
+  coord_flip()
+```
+
+You are probably asking, why not just create the plot with x and y switched.  Well, that is a great question.  The answer is because <samp>geom_bar</samp> assumes vertical bars, and doesn't work if you try and switch x and y.  
+
+```{r, fig.align='center'}
+ggplot(iris, aes(y = Species, x = Petal.Length)) +
+  geom_bar(stat = "summary", fun.y = mean, fill = "bisque", col = "orange")
+```
+
+Not very informative.  
+
+
+## coord_fixed
+
+By default, and thankfully, ggplots are created with limits that are appropriate for x and y variables.  But what if you want both axis to represent the same magnitude (e.g., a given distance equal 1 unit for both axes).  Yes you guessed it, <samp>coord_fixed()</samp> does this for you.  
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Petal.Width, y = Petal.Length)) +
+  geom_point(col = "orange") +
+  theme_minimal() + 
+  coord_fixed() 
+```
+
+## coord_trans
+
+You can easily transform the axes with <samp>coord_trans()</samp>.  It is important to note that <samp>coord_trans()</samp> applies the transformation after any scales or stats.  Below illustrates a log tranformation of the x and y axis.  
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Petal.Width, y = Petal.Length)) +
+  geom_point(col = "darkorchid4") +
+  coord_trans(x = "log10", y = "log10")
+```
+
+## coord_polar
+You can also make plots on with polar coordinates.  Here is just an example of a bar plot on a polar coordinate system.  
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Species, y = Petal.Width)) +
+  geom_bar(stat = "summary", fun.y = mean, fill = "steelblue", alpha = 0.5) +
+  coord_polar()
+```
+
+# Formatting legends
+
+You can format the legend in several ways.  You can provide information inside a geom or stat, you can use the function <samp>guides()</samp>, and you can modify the theme.  Below are several examples using these different ways.  
+
+## Supressing legends
+
+Here is graph with the default setting.
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, colour = Species, size = Petal.Length/Petal.Width)) +
+geom_point()
+```
+
+You can supress individual legends by using the function <samp>guides()</samp>.  Below the Petal.Length/Petal.Width legend is supress.
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, colour = Species, size = Petal.Length/Petal.Width)) +
+geom_point() +
+guides(size = FALSE)
+```
+
+You can supress all the legends using the function <samp>theme()</samp>.  
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, colour = Species, size = Petal.Length/Petal.Width)) +
+geom_point() +
+theme(legend.position = "none")
+```
+
+# Mixing it up
+
+ggplot2 is very flexible.  For practiced users, this is often very useful.  For new users this can be fustrating.  So, it is important to understand that you can specify the same plot in many different ways.  This is because you can specify the stat or geom with a function and then call the stat or geom with an argument of the function.  The example below illustrates the point.  Notice that both of the following plots are the same, but I called them two different ways.  
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Species, y = Sepal.Width)) +
+  geom_crossbar(stat = "summary", fun.data = "mean_se", fill = "orange")
+```
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Species, y = Sepal.Width)) +
+  stat_summary(fun.data = mean_se, geom = "crossbar", fill = "orange")
+```
+
+# Customizing plots
+
+Now let's go over some of the finer points about customizing points.  Typically, users will create a theme that they like, which will create graphs that appeal to the user.  However, there are some aspects about customizing a graph that typically need customization for each plot you create.  
+
+## Positioning legends
+
+The position of the legend or legends is controlled by the argument <samp>legend.position</samp> in the function <samp>theme()</samp>.  You can put the legend at the "top", "left", "right", or "bottom", or you can give the coordinates of where you want the legend.  Currently it is difficult, but possible to specific different locations of more than one legend (this is outside the scope of this lab and you will need to look on the web if you want to learn how to do it).  
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, colour = Species, size = Petal.Length/Petal.Width)) +
+geom_point() +
+theme(legend.position = "top")
+```
+
+```{r, fig.align='center'}
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, colour = Species, size = Petal.Length/Petal.Width)) +
+geom_point() +
+theme(legend.position = c(0.2, 0.5))
+```
+
+

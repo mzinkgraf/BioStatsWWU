@@ -1,0 +1,47 @@
+---
+title: "Helpful Webpages"
+author: "Ben Miner and Matthew Zinkgraf"
+date: '`r Sys.Date()`'
+output:
+  html_document:
+    toc: true
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{Helpful Webpages}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteRender{all}
+---
+
+<h1>Helpful Webpages</h1>
+
+# Related to R and RStudio
+
+<dl class="dl-horizontal">
+  <dt><a href="swirlstats.com/students.html" target="_blank">Swirl</a></dt>
+  <dd>This is a package in R that will help you learn R. Install and load the package swirl, and then run the function <samp>swirl()</samp> to start the tutorial.</dd>
+  <dt><a href="http://cran.r-project.org/doc/manuals/R-intro.pdf" target="_blank">Intro to R Manual</a></dt>
+  <dd>This is the general R manual with lots of helpful information about using R.</dd>
+  <dt><a href="https://www.rstudio.com" target="_blank">RStudio Website</a></dt>
+  <dd>This is the RStudio help website.  It has a bunch of information about using RStudio, from basic to advanced topics (look under Resources).</dd>
+  <dt><a href="http://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf"  target="_blank">Short Intro to R</a></dt>
+  <dd>This is a short guide to using R with RStudio.  It has helpful information on functions and errors at the end.</dd>
+  <dt><a href="http://www.statmethods.net/index.html" target="_blank">R Quick Website</a></dt>
+  <dd>This website has quick descriptions and examples about most of the basics in R.</dd>
+  <dt><a href="http://cran.r-project.org/doc/contrib/Short-refcard.pdf" target="_blank">R Cheatsheet</a></dt>
+  <dd>This has a bunch of common functions for when you forget.</dd>
+</dl>
+
+There are lots of other sites.  Just search the web for R tutorial, or how to graph in R, or whatever you are interested in learning.  Someone very likely posted a tutorial about it.  
+
+# Related to packages
+
+<dl class="dl-horizontal">
+  <dt><a href="http://docs.ggplot2.org/current/" target="_blank">ggplot2 Website</a></dt>
+  <dd>This has informationa about everything you can do with ggplot2. It is not the best for first learning how to use ggplot2, but it is great once you know the basics.</dd>
+  <dt><a href="http://www.ceb-institute.org/bbs/wp-content/uploads/2011/09/handout_ggplot2.pdf"  target="_blank">Intro to ggplot2</a></dt>
+  <dd>This is a short, but good tutorial about ggplot2.  It does get advanced torward the end, but not before it goes over the basics.</dd>
+</dl>
+
+
+

@@ -1,0 +1,314 @@
+---
+title: "Data Types"
+author: "Ben Miner and Matthew Zinkgraf"
+date: '`r Sys.Date()`'
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{Week 2: Data Types}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteRender{all}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+<h1>
+
+Data in R
+
+</h1>
+
+# Data Structure
+
+An important part of science is entering and managing data. Because we
+do most of our statistics with computers, we have to enter and store
+data on computers. Although this sounds simple, many students have no
+idea how to properly store data.
+
+Generally a spreadsheet program is used to enter and store data. The
+important thing to remember is start in the upper left-hand corner of
+the spreadsheet and use the first row to label each column. Because some
+programs do not like spaces, I always use an underscore "\_" or "."
+instead of a space. For example, I might label a column that has the
+initial weight in grams as "Initial_weight_g". It is important to
+provide a column for each piece of important information. For example,
+if you manipulated temperature and light in your experiment you should
+have a column for temperature and a column for light--not a column for
+treatment, though you might include a third column label treatment.
+
+Once you have labeled the columns you can begin to enter data. Make sure
+to always enter something for each column, unless there is a reason to
+leave a cell blank. I will provide an example spreadsheet to illustrate
+how to properly enter data into a spreadsheet.
+
+# Data in R
+
+Because we need to get data into R for analyses, it is important to know
+the objects that can store data in R: vectors, , factors, data.frames,
+arrays, matrices, and lists. We have already seen examples of vectors.
+For example, <samp>1:10</samp> produces a vector with 10 integers
+beginning with 1 and ending with 10. Let's go over each of these
+objects, but keep in mind that vectors, factors, and data.frames are
+used most often for storing data.
+
+## Common data types for graphing and analyzing
+
+### Vector
+
+Vectors are a set of values that all have the same type. For example,
+all the values in a vector might be integers. Vectors cannot be a
+combination of different types of values (e.g., a group of words and
+numbers), and R will either give you an error, or convert all the values
+to a common type. You will use vectors a lot because they often
+represent your data in R. So it is important that we know how to create
+them.
+
+There are several ways to create vectors in R.
+
+<dl class="dl-horizontal">
+
+<dt>
+
+c
+
+</dt>
+
+<dd>
+
+This function concatenates numbers or characters separated by commas.
+
+</dd>
+
+<dt>
+
+sequence
+
+</dt>
+
+<dd>
+
+This function generates a vector of integers starting at 1 and counting
+by ones.
+
+</dd>
+
+<dt>
+
+seq
+
+</dt>
+
+<dd>
+
+This function creates a sequence of numbers, but is more flexible than
+the function sequence. Putting a colon between two numbers is short-hand
+for this function when you are counting by ones.
+
+</dd>
+
+</dl>
+
+Try and generate a few vectors with these functions. Use the help file
+to see which arguments are required for each function. Also use the
+colon to quickly generate a vector of integers. Below are a few examples
+without the output, so you can think about what the output should look
+like before you run each example.
+
+```{r, eval = FALSE}
+c(1, 5, 10.3)
+sequence(100)
+4:12
+-34:28
+seq(4, 12)
+seq(-34, 28)
+seq(4, 12, by = 0.2)
+seq(1, 200, length.out = 5)
+seq(1, 100, along.with = 1:10)
+c("Ben", "Melissa", "Gabriel", "Gavin") #a vector of characters
+```
+
+Here are a few more example with the output. Remember that all values of
+the vector must have the same type (e.g., numbers).
+
+```{r}
+c(1, 2, 3.4, 6, 8)
+2:6
+seq(from = 4, to = 5, by = 0.1)
+rep(c(4, 5), 3)
+rep(c(4, 5), each = 3)
+```
+
+The code below illustrates how R will convert all items in a vector to
+the same data type. Notice that I include both numbers and characters in
+the arguments for function <samp>c()</samp>. Now look at the output and
+notice that all items have quotes around them, which indicates that R
+has converted the numbers to characters. In other words,
+<samp>"4"</samp> is not the number 4, but the character four.
+
+```{r}
+c(4, 3, "Ben", "Dexter", "orange")
+```
+
+### Factor
+
+A factor is a vector of data in which there are specific groups in the
+vector. It is typically used to tell R that the variable is categorical.
+For example, an experiment where we have two treatments, light and dark,
+and these treatments represent a categorical variable. Making sure R, or
+any other statistical program, knows which variables are categorical is
+very important so the computer uses the correct test. The function
+<samp>factor()</samp> is a common way to create a factor.
+
+```{r}
+#Create a vector
+(treatments <- rep(c("light", "dark"), each = 4))
+#Convert the vector to a factor
+(treatment.fac <- factor(treatments)) #Assigns and prints vector
+#create another vector
+vals <- rep(LETTERS[1:2], each = 5); vals
+#Convert the vector to a factor
+ben.factor <- factor(vals); ben.factor #Also assigns and prints vector
+```
+
+There is also another function <samp>gl()</samp> that you can use to
+quickly create a factor. This function requires you indicate the number
+of levels <samp>n</samp>, the number of replicates in each level
+<samp>k</samp>, and the names of each level <samp>labels</samp>. This
+function is more concise, and creates a vector and converts it to a
+factor at the same time.
+
+```{r}
+#More concise method with gl()
+(treatment.fac2 <- gl(n = 2, k = 4, labels = c("light", "dark"))) #Same as treatment.fac
+(new.factor <- gl(3, 10, labels = c("low", "med", "high")))
+```
+
+By default R doesn't print the object when you assign it a name. To
+print the object, just type the name of the object or put paratheses
+around code that assigns a name. Both are illustrated above. The
+semicolon is use when you want to put additional code on a single line.
+
+What do you notice that is different between the variable
+<samp>vals</samp> and the variable <samp>ben.factor</samp>? There are
+lots of advantages to using factors. For example, it is easy to perform
+calculations on groups specified by the factor. For example, say the
+<samp>ben.factor</samp> specifies two treatments in an experiment, and
+our data are as follows.
+
+```{r}
+#Enter in some numeric data to go with ben.factor
+data <- c(1, 2, 3, 2, 3, 5, 4, 6, 7, 6) 
+length(data)    #Just checking sample size of data
+```
+
+It is now very easy to calculate, say the mean and standard deviation
+for treatment "A" and treatment "B". To do this we just use the
+<samp>tapply()</samp> function. In the parentheses, first give the
+vector with the numbers (in this case <samp>data</samp>), next give the
+factor (in this case <samp>ben.factor</samp>), and last give the
+function you want to apply (in this case <samp>mean</samp>). Try this
+
+```{r}
+tapply(data, ben.factor, mean)
+tapply(data, ben.factor, sd)
+```
+
+### Data.frame
+
+<samp>data.frames</samp> are really just a collection of vectors and
+factors, and represent exactly what you see in an Excel spreadsheet. In
+other words, they represent a table of data with column labels at the
+top. <samp>data.frames</samp> are easy to make with the function
+<samp>data.frame()</samp>, where the different vectors or factors,
+separated with commas, go in the parentheses. For example, let's make a
+data.frame with our variables we have already created.
+
+```{r}
+ben.frame <- data.frame(Treatment = ben.factor, Data = data)
+ben.frame
+```
+
+We can check to see what type of variable each column represents with
+the function <samp>str()</samp>, which stands for structure.
+
+```{r}
+str(ben.frame)
+```
+
+We can also get a summary of our data with the function
+<samp>summary()</samp>.
+
+```{r}
+summary(ben.frame)
+```
+
+Now create your own <samp>data.frame</samp> with two factors, and one
+numeric vector.
+
+## Other useful data types
+
+### Matrix
+
+The function <samp>matrix()</samp> is the primary way to create a
+matrix. Like a vector, all members of a matrix must be the same type.
+There are three arguments, <samp> nrow</samp>, <samp>ncol</samp>, and
+<samp>byrow</samp>, that are commonly used when creating a matrix with
+the function <samp>matrix()</samp>. You can use either <samp>nrow</samp>
+to indicate the number of rows (R then calculates the number of
+columns), or <samp>ncol</samp> to indicdate the number of columns (R
+then calculates the number of rows). The argument <samp>byrow</samp>, by
+default is <samp>FALSE</samp>, indicates whether you want to fill in
+rows or columns first. If <samp>byrow = FALSE</samp>, R will fill in all
+the rows of column 1 before filling in values in the column. If
+<samp>byrow = TRUE</samp>, R will fill in all the values of row 1 before
+filling in values in the second row.
+
+```{r}
+matrix(1:10, nrow = 2)
+matrix(1:10, ncol = 2)
+matrix(1:10, nrow = 2, byrow = T)
+```
+
+### Array
+
+An array is similar to a matrix, but you can specify some addtional
+information, like the dimensions. The function <samp>array()</samp> is
+the primary way to create an array. An array is different from a matrix
+because a matrix allows specific mathematical operations that you cannot
+do on an array. Typically programmers use an array to store information
+as a program runs. For example, you create a loop to do a calculation
+many times, and the result of each calculation is stored in an array.
+
+```{r}
+array(3:12, dim = c(2, 5))
+
+#example of looping and using an array.
+my.array <- array(NA, dim = c(2, 10))
+my.array
+for(i in 1:2){
+  for(j in 1:10){
+    my.array[i, j] <- i*j
+  }
+}
+my.array
+```
+
+### List
+
+A list allows you to group different types of data into a single list.
+For example, a list can have characters, numbers, dates, vectors, etc.
+The function <samp>list()</samp> is the primary way to create a list.
+You can also name part of a list.
+
+```{r}
+list("Ben", 1:5, letters[1:4])
+#Now with names
+list(Name = "Ben", Numbers = 1:5, Letters = letters[1:4]) 
+```
+
+<samp>letters</samp> is a built-in vector of the lower-case alphabet,
+and <samp>LETTERS</samp> is a vector of the upper-case alphabet.
