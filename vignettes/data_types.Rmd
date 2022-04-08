@@ -3,24 +3,18 @@ title: "Data Types"
 author: "Ben Miner and Matthew Zinkgraf"
 date: '`r Sys.Date()`'
 output:
-  rmarkdown::html_vignette:
+  html_document:
     toc: true
     number_sections: true
 vignette: >
-  %\VignetteIndexEntry{Week 2: Data Types}
+  %\VignetteIndexEntry{Data Types}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   %\VignetteRender{all}
-  %\VignetteEngine{knitr::rmarkdown}
-editor_options: 
-  markdown: 
-    wrap: 72
 ---
 
-<h1>
 
-Data in R
-
-</h1>
+<h1>Data in R</h1>
 
 # Data Structure
 

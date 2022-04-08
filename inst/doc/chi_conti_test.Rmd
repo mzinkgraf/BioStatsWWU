@@ -7,7 +7,7 @@ output:
     toc: true
     number_sections: true
 vignette: >
-  %\VignetteIndexEntry{Week 6: Chi-squared and G Contingency Tests}
+  %\VignetteIndexEntry{Chi-squared and G Contingency Tests}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   %\VignetteRender{all}
