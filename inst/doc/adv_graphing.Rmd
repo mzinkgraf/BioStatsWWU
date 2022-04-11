@@ -13,6 +13,8 @@ vignette: >
   %\VignetteRender{all}
 ---
 
+[Back to Weekly Labs](Weekly_labs.html)
+
 <h1>Advanced Graphing</h1>
 
 In this lab, you will learn a ton about plotting in R.    
