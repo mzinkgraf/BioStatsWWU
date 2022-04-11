@@ -45,6 +45,6 @@ The BioStatsWWU Package can be installed from github:
 ## Online Resources
 
 - <https://whitlockschluter3e.zoology.ubc.ca/>: Website of "The analysis of biological data" by Michael Whitlock and Dolph Schluter.
-- [WWU Biometrics Website](http://myweb.facstaff.wwu.edu/~minerb2/biometrics/index.html): This site is for students taking BIOL 340 or ESCI 340 Biostatistics class at Western Washington University.
+- [WWU Biometrics Website](https://htmlpreview.github.io/?https://github.com/mzinkgraf/BioStatsWWU/blob/master/index.html): This site is for students taking BIOL 340 or ESCI 340 Biostatistics class at Western Washington University.
 
 
