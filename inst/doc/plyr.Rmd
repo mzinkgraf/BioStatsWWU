@@ -13,6 +13,8 @@ vignette: >
   %\VignetteRender{all}
 ---
 
+[Back to Weekly Labs](Weekly_labs.html)
+
 <h1>Plyr Package</h1>
 
 The plyr package for R helps summarize data quickly.  For example, have you ever tried to calculate the means for a bunch of different groups in Excel; what a pain in the ass.  We have already learned the <samp>tapply()</samp> function, but it limits you to only one summary stat (e.g., the means for each group of interest).  The plyr package shines when you want to summarize several different stats.

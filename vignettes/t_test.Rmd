@@ -13,6 +13,8 @@ vignette: >
   %\VignetteRender{all}
 ---
 
+[Back to Weekly Labs](Weekly_labs.html)
+
 <h1>t-tests</h1>
 
 There are 3 types of t-tests that are commonly used in biology: one-sample t-test, two-sample t-test, and paired  t-test. They are all very similar, so we will start with a one-sample t-test in detail and contrast the other two t-tests with the one-sample t-test.  

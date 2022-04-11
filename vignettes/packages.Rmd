@@ -13,6 +13,8 @@ vignette: >
   %\VignetteRender{all}
 ---
 
+[Back to Weekly Labs](Weekly_labs.html)
+
 <h1>Installing and Loading Packages</h1>
 
 In R, you can load additional packages.  These packages include functions that allow you to do all kinds of amazing things.  You can use the function <samp>library()</samp> without any arguments to see what packages are currently installed on your computer.  Some of these packages will already be loaded, but some are not.  In RStudio, you can also just click on the Packages tab in the lower-right window to see which packages are install on your computer, and which are loaded.  Loaded packages have a check to the left of the name of the package.  Below I will guide you through installing and loading packages in R.  

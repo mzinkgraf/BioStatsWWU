@@ -13,6 +13,8 @@ vignette: >
   %\VignetteRender{all}
 ---
 
+[Back to Weekly Labs](Weekly_labs.html)
+
 <h1>Probability Distributions</h1>
 
 In this lab, we will explore four commonly used probability distributions, and learn how to explore other distributions.

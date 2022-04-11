@@ -13,6 +13,8 @@ vignette: >
   %\VignetteRender{all}
 ---
 
+[Back to Weekly Labs](Weekly_labs.html)
+
 <h1>Inputting Data into R</h1>
 There are many ways to input data into R.  Below are examples of the most common ways.  
 

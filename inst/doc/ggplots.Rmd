@@ -13,6 +13,8 @@ vignette: >
   %\VignetteRender{all}
 ---
 
+[Back to Weekly Labs](Weekly_labs.html)
+
 <h1>Graphing packages</h1>
 
 There are many additional packages to help you visualize data.  However, there are two that are widely used.  The package <samp>lattice</samp> comes with the base distribution and has been around for a while.  The package <samp>ggplot2</samp> is a newer package, and most people that are learning R find it easier to use.  Both are very powerful, but we will focus on <samp>ggplot2</samp> today.  

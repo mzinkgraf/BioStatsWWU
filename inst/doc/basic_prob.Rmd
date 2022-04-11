@@ -13,6 +13,8 @@ vignette: >
   %\VignetteRender{all}
 ---
 
+[Back to Weekly Labs](Weekly_labs.html)
+
 <h1>Basic Probability</h1>
 
 We will go over a few examples, to illustrate how you can use R to help you with probabilities.  

@@ -13,6 +13,8 @@ vignette: >
   %\VignetteRender{all}
 ---
 
+[Back to Weekly Labs](Weekly_labs.html)
+
 <h1>Basic graphing</h1>
 To give you an idea of what you can do in R, let's make some graphs.  Basic graphing in R is very simple.  Here are a couple of functions to easily generate simple graphs in R.  
 

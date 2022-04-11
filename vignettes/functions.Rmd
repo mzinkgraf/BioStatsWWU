@@ -13,6 +13,8 @@ vignette: >
   %\VignetteRender{all}
 ---
 
+[Back to Weekly Labs](Weekly_labs.html)
+
 <h1>Creating your own functions</h1>
 Although many programmers have created many thousands of functions for R users, it is sometimes useful to write your own.  For example, you might want to calculate a specific value with an equation you found in a paper, or you might want to create a custom graph and use it to make many graphs.  Regardless of the reason, below are the general steps you would take to create your own function.   
 

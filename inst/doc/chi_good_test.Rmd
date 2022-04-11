@@ -13,6 +13,8 @@ vignette: >
   %\VignetteRender{all}
 ---
 
+[Back to Weekly Labs](Weekly_labs.html)
+
 <h1>Chi-squared Goodness-of-Fit Test</h1>
 
 The chi-squared goodness-of-fit test is used to test whether observed frequencies differ from expected frequencies. This statistical test is used when there are 2 or more categories for a categorical variable. 

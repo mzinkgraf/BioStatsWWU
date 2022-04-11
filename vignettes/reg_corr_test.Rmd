@@ -13,6 +13,8 @@ vignette: >
   %\VignetteRender{all}
 ---
 
+[Back to Weekly Labs](Weekly_labs.html)
+
 <h1>Regression</h1>
 
 A regression analysis is a statistical in which you find the best fit line to the data, and then test whether the slope and y-intercept are significantly difference from zero (or another value).  To test whether the slope is difference from zero, you can use an analysis of variance or a t test.  To test the intercept, you can use a t test.  You already know how to do a t test and analysis of variance.  So, really the only new information is how to find the line that best fits the data.  

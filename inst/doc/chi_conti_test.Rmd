@@ -13,6 +13,8 @@ vignette: >
   %\VignetteRender{all}
 ---
 
+[Back to Weekly Labs](Weekly_labs.html)
+
 <h1>Chi-squared and G Contingency Tests</h1>
 
 # Null and Alternative Hypotheses
