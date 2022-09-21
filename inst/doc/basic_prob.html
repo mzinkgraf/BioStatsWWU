@@ -247,7 +247,7 @@ div.tocify {
   <div class="container-fluid">
   
     <div class="navbar-header">
-      <a class="navbar-brand" href="index.html">
+      <a class="navbar-brand" href="../../index.html">
         Biometrics (Biol 340)
       </a>
     </div>
@@ -288,7 +288,6 @@ div.tocify {
             <li><a href="t_test.html">t-Test</a></li>
             <li><a href="anova.html">ANOVA</a></li>
             <li><a href="reg_corr_test.html">Regression and Correlation</a></li>
-            <li><a href="logistic_test.html">Logistic Regression</a></li>
           </ul>
         </li>
           
@@ -296,7 +295,7 @@ div.tocify {
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Graphing
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="basic_graphing.html">Basic Graphing</a></li>
+            <li><a href="BasicGraphing.html">Basic Graphing</a></li>
             <li><a href="adv_graphing.html">Advanced Graphing</a></li>
             <li><a href="ggplots.html">GGplot2</a></li>
           </ul>
@@ -897,19 +896,19 @@ below because each spin of the table is random.</p>
 <pre class="r"><code>playingRoulette &lt;- sim(roulTablep, ntrials = 2000)
 head(playingRoulette)</code></pre>
 <pre><code>##   num color
-## 1  30   Red
-## 2  31 Black
-## 3   0 Green
-## 4   7   Red
-## 5   1   Red
-## 6  28 Black</code></pre>
+## 1   6 Black
+## 2  10 Black
+## 3  30   Red
+## 4  15 Black
+## 5   4 Black
+## 6  10 Black</code></pre>
 <p>Now let’s figure out how we did. Let’s assume we played 5 dollars on
 red each time.</p>
 <pre class="r"><code>wagered &lt;- 5*2000
 #nrow() returns the number of rows
 earnings &lt;- 10 * nrow(subset(playingRoulette, color == &quot;Red&quot;)) #10 because $5 for bet and $5 for winnings
 (winnings &lt;- earnings - wagered)</code></pre>
-<pre><code>## [1] -110</code></pre>
+<pre><code>## [1] -500</code></pre>
 <p>How did we do? And that is why you should not play roulette.</p>
 </div>
 
