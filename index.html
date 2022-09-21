@@ -212,17 +212,23 @@ div.tocify {
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-  
+
     <div class="navbar-header">
       <a class="navbar-brand" href="index.html">
-        Biometrics (Biol 340)
+        Biostatistics (Biol 340)
       </a>
     </div>
 
     <div>
       <ul class="nav navbar-nav">
-        <li><a href="inst/doc/weekly_labs.html">Weekly Labs</a></li>
-        
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Weekly Labs
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="inst/doc/weekly_labs.html">Weekly Labs</a></li>
+          </ul>
+        </li>
+
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Intro to R
           <span class="caret"></span></a>
@@ -245,7 +251,7 @@ div.tocify {
             <li><a href="inst/doc/prob_dist.html">Probability Distributions</a></li>
           </ul>
         </li>
-        
+
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Statistical Tests
           <span class="caret"></span></a>
@@ -257,7 +263,7 @@ div.tocify {
             <li><a href="inst/doc/reg_corr_test.html">Regression and Correlation</a></li>
           </ul>
         </li>
-          
+
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Graphing
           <span class="caret"></span></a>
@@ -269,10 +275,9 @@ div.tocify {
         </li>
       </ul>
     </div>
- 
+
   </div>
 </nav>
-
 
 <div class="fluid-row" id="header">
 
