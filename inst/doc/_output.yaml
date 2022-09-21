@@ -1,0 +1,10 @@
+html_document:
+  self_contained: false
+  theme: flatly
+  highlight: textmate
+  lib_dir: libs
+  toc: true
+  toc_depth: 5
+  toc_float: true
+  includes: 
+    before_body: includes/header.html

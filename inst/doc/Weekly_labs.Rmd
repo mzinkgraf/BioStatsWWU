@@ -1,0 +1,70 @@
+---
+title: "Weekly Labs"
+author: "Ben Miner and Matthew Zinkgraf"
+date: '`r Sys.Date()`'
+output:
+  html_document:
+    toc: true
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{Basic Probability}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteRender{all}
+---
+
+<h3>
+Week 1
+</h3>
+<p>Intro to R <span class="glyphicon glyphicon-arrow-right"></span> <a href="intro_R.html">Intro to R</a> <br> Graphing <span class="glyphicon glyphicon-arrow-right"></span> <a href="BasicGraphing.html">Basic Graphing</a></p>
+
+<h3>
+Week 2
+</h3>
+Intro to R <span class="glyphicon glyphicon-arrow-right"></span> <a href="data_types.html">Data Types</a> <br> Intro to R <span class="glyphicon glyphicon-arrow-right"></span> <a href="input_R.html">Inputting Data</a> <br> Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="des_stats.html">Descriptive Stats</a> <br> Graphing <span class="glyphicon glyphicon-arrow-right"></span> <a href="BasicGraphing.html">Basic Graphing</a>
+
+<h3>
+Week 3
+</h3>
+Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="des_stats.html">Descriptive Stats</a> <br> Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="basic_prob.html">Basic Probability</a>
+
+<h3>
+Week 4
+</h3>
+Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="basic_prob.html">Basic Probability</a> <br> Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="prob_dist.html">Probability Distributions</a> <br> Graphing <span class="glyphicon glyphicon-arrow-right"></span> <a href="adv_graphing.html">Advanced Graphing</a>
+
+<h3>
+Week 5
+</h3>
+<p>Midterm</p>
+
+<h3>
+Week 6
+</h3>
+Statistical Tests <span class="glyphicon glyphicon-arrow-right"></span> <a href="chi_good_test.html">Chi-squared goodness-of-fit test</a> <br> Statistical Tests <span class="glyphicon glyphicon-arrow-right"></span> <a href="chi_conti_test.html">Chi-squared contingency test</a>
+
+<h3>
+Week 7
+</h3>
+Statistical Tests <span class="glyphicon glyphicon-arrow-right"></span> <a href="t_test.html">t tests</a>
+
+<h3>
+Week 8
+</h3>
+Statistical Tests <span class="glyphicon glyphicon-arrow-right"></span> <a href="anova.html">ANOVA</a>
+
+<h3>
+Week 9
+</h3>
+<p>Statistical Tests <span class="glyphicon glyphicon-arrow-right"></span> <a href="reg_corr_test.html">Regression and correlation</a></p>
+
+<h3>
+Week 10
+</h3>
+Graphing <span class="glyphicon glyphicon-arrow-right"></span> <a href="ggplots.html">ggplots2</a>
+
+<h3>
+Other Resources</h3>
+Help <span class="glyphicon glyphicon-arrow-right"></span> <a href="R_websites.html">Helpful Websites</a> <br> Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="functions.html">Functions</a> <br> Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="packages.html">Packages</a> <br> Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="plyr.html">plyr</a>
+
+

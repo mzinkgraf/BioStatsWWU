@@ -1,24 +1,36 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Ben Miner and Matthew Zinkgraf" />
 
+<meta name="date" content="2022-09-21" />
 
 <title>Weekly Labs</title>
 
-<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -26,12 +38,16 @@
 <link href="libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="libs/highlightjs-9.12.0/highlight.js"></script>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -44,37 +60,11 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
 
 
-</head>
 
-<body>
+
+
 
 <style type = "text/css">
 .main-container {
@@ -82,64 +72,90 @@ h6 {
   margin-left: auto;
   margin-right: auto;
 }
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
 }
 </style>
 
 
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
-
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3,h4,h5",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -153,6 +169,12 @@ $(document).ready(function ()  {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -188,8 +210,6 @@ div.tocify {
 
 .tocify-subheader .tocify-item {
   font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
 }
 
 .tocify .list-group-item {
@@ -199,8 +219,18 @@ div.tocify {
 
 </style>
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -211,6 +241,71 @@ div.tocify {
 
 
 
+<br>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+  
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.html">
+        Biometrics (Biol 340)
+      </a>
+    </div>
+
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a href="weekly_labs.html">Weekly Labs</a></li>
+        
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Intro to R
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="intro_R.html">Intro to R</a></li>
+            <li><a href="data_types.html">Data Types</a></li>
+            <li><a href="input_R.html">Inputting Data</a></li>
+            <li><a href="packages.html">Packages</a></li>
+            <li><a href="R_websites.html">Helpful Websites</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Basic Skills
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="des_stats.html">Descriptive Stats</a></li>
+            <li><a href="plyr.html">Plyr Package</a></li>
+            <li><a href="basic_prob.html">Basic Proability</a></li>
+            <li><a href="prob_dist.html">Probability Distributions</a></li>
+          </ul>
+        </li>
+        
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Statistical Tests
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="chi_good_test.html">Chi-squared Goodness-of-fit Test</a></li>
+            <li><a href="chi_conti_test.html">Chi-squared Contingency Test</a></li>
+            <li><a href="t_test.html">t-Test</a></li>
+            <li><a href="anova.html">ANOVA</a></li>
+            <li><a href="reg_corr_test.html">Regression and Correlation</a></li>
+            <li><a href="logistic_test.html">Logistic Regression</a></li>
+          </ul>
+        </li>
+          
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Graphing
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="basic_graphing.html">Basic Graphing</a></li>
+            <li><a href="adv_graphing.html">Advanced Graphing</a></li>
+            <li><a href="ggplots.html">GGplot2</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+ 
+  </div>
+</nav>
 
 <div class="fluid-row" id="header">
 
@@ -219,104 +314,102 @@ div.tocify {
 
 </div>
 
-<div class="panel panel-primary">
-<div class="panel-body">
-<h3>
-Back
-</h3>
-<p> <form>
- <input type="button" value="Back" onclick="history.back()">
-</form></p>
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Weekly Labs</h1>
+<h4 class="author">Ben Miner and Matthew Zinkgraf</h4>
+<h4 class="date">2022-09-21</h4>
+
 </div>
-</div>
-<div class="panel panel-primary">
-<div class="panel-body">
+
+
 <h3>
 Week 1
 </h3>
-<p>Intro to R <span class="glyphicon glyphicon-arrow-right"></span> <a href="intro_R.html">Intro to R</a> <br> Graphing <span class="glyphicon glyphicon-arrow-right"></span> <a href="BasicGraphing.html">Basic Graphing</a></p>
-</div>
-</div>
-<div class="panel panel-primary">
-<div class="panel-body">
+<p>
+Intro to R <span class="glyphicon glyphicon-arrow-right"></span>
+<a href="intro_R.html">Intro to R</a> <br> Graphing <span
+class="glyphicon glyphicon-arrow-right"></span>
+<a href="BasicGraphing.html">Basic Graphing</a>
+</p>
 <h3>
 Week 2
 </h3>
-Intro to R <span class="glyphicon glyphicon-arrow-right"></span> <a href="data_types.html">Data Types</a> <br> Intro to R <span class="glyphicon glyphicon-arrow-right"></span> <a href="input_R.html">Inputting Data</a> <br> Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="des_stats.html">Descriptive Stats</a> <br> Graphing <span class="glyphicon glyphicon-arrow-right"></span> <a href="BasicGraphing.html">Basic Graphing</a>
-</div>
-</div>
-<div class="panel panel-primary">
-<div class="panel-body">
+<p>Intro to R <span class="glyphicon glyphicon-arrow-right"></span>
+<a href="data_types.html">Data Types</a> <br> Intro to R <span
+class="glyphicon glyphicon-arrow-right"></span>
+<a href="input_R.html">Inputting Data</a> <br> Basic Skills <span
+class="glyphicon glyphicon-arrow-right"></span>
+<a href="des_stats.html">Descriptive Stats</a> <br> Graphing <span
+class="glyphicon glyphicon-arrow-right"></span>
+<a href="BasicGraphing.html">Basic Graphing</a></p>
 <h3>
 Week 3
 </h3>
-Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="des_stats.html">Descriptive Stats</a> <br> Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="basic_prob.html">Basic Probability</a>
-</div>
-</div>
-<div class="panel panel-primary">
-<div class="panel-body">
+<p>Basic Skills <span class="glyphicon glyphicon-arrow-right"></span>
+<a href="des_stats.html">Descriptive Stats</a> <br> Basic Skills <span
+class="glyphicon glyphicon-arrow-right"></span>
+<a href="basic_prob.html">Basic Probability</a></p>
 <h3>
 Week 4
 </h3>
-Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="basic_prob.html">Basic Probability</a> <br> Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="prob_dist.html">Probability Distributions</a> <br> Graphing <span class="glyphicon glyphicon-arrow-right"></span> <a href="adv_graphing.html">Advanced Graphing</a>
-</div>
-</div>
-<div class="panel panel-primary">
-<div class="panel-body">
+<p>Basic Skills <span class="glyphicon glyphicon-arrow-right"></span>
+<a href="basic_prob.html">Basic Probability</a> <br> Basic Skills <span
+class="glyphicon glyphicon-arrow-right"></span>
+<a href="prob_dist.html">Probability Distributions</a> <br> Graphing
+<span class="glyphicon glyphicon-arrow-right"></span>
+<a href="adv_graphing.html">Advanced Graphing</a></p>
 <h3>
 Week 5
 </h3>
-<p>Midterm</p>
-</div>
-</div>
-<div class="panel panel-primary">
-<div class="panel-body">
+<p>
+Midterm
+</p>
 <h3>
 Week 6
 </h3>
-Statistical Tests <span class="glyphicon glyphicon-arrow-right"></span> <a href="chi_good_test.html">Chi-squared goodness-of-fit test</a> <br> Statistical Tests <span class="glyphicon glyphicon-arrow-right"></span> <a href="chi_conti_test.html">Chi-squared contingency test</a>
-</div>
-</div>
-<div class="panel panel-primary">
-<div class="panel-body">
+<p>Statistical Tests <span
+class="glyphicon glyphicon-arrow-right"></span>
+<a href="chi_good_test.html">Chi-squared goodness-of-fit test</a> <br>
+Statistical Tests <span class="glyphicon glyphicon-arrow-right"></span>
+<a href="chi_conti_test.html">Chi-squared contingency test</a></p>
 <h3>
 Week 7
 </h3>
-Statistical Tests <span class="glyphicon glyphicon-arrow-right"></span> <a href="t_test.html">t tests</a>
-</div>
-</div>
-<div class="panel panel-primary">
-<div class="panel-body">
+<p>Statistical Tests <span
+class="glyphicon glyphicon-arrow-right"></span> <a href="t_test.html">t
+tests</a></p>
 <h3>
 Week 8
 </h3>
-Statistical Tests <span class="glyphicon glyphicon-arrow-right"></span> <a href="anova.html">ANOVA</a>
-</div>
-</div>
-<div class="panel panel-primary">
-<div class="panel-body">
+<p>Statistical Tests <span
+class="glyphicon glyphicon-arrow-right"></span>
+<a href="anova.html">ANOVA</a></p>
 <h3>
 Week 9
 </h3>
-<p>Statistical Tests <span class="glyphicon glyphicon-arrow-right"></span> <a href="reg_corr_test.html">Regression and correlation</a></p>
-</div>
-</div>
-<div class="panel panel-primary">
-<div class="panel-body">
+<p>
+Statistical Tests <span class="glyphicon glyphicon-arrow-right"></span>
+<a href="reg_corr_test.html">Regression and correlation</a>
+</p>
 <h3>
 Week 10
 </h3>
-Graphing <span class="glyphicon glyphicon-arrow-right"></span> <a href="ggplots.html">ggplots2</a>
-</div>
-</div>
-<div class="panel panel-primary">
-<div class="panel-body">
+<p>Graphing <span class="glyphicon glyphicon-arrow-right"></span>
+<a href="ggplots.html">ggplots2</a></p>
 <h3>
-Other Resources</h3>
-Help <span class="glyphicon glyphicon-arrow-right"></span> <a href="R_websites.html">Helpful Websites</a> <br> Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="functions.html">Functions</a> <br> Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="packages.html">Packages</a> <br> Basic Skills <span class="glyphicon glyphicon-arrow-right"></span> <a href="plyr.html">plyr</a>
-</div>
-</div>
-
+Other Resources
+</h3>
+<p>Help <span class="glyphicon glyphicon-arrow-right"></span>
+<a href="R_websites.html">Helpful Websites</a> <br> Basic Skills <span
+class="glyphicon glyphicon-arrow-right"></span>
+<a href="functions.html">Functions</a> <br> Basic Skills <span
+class="glyphicon glyphicon-arrow-right"></span>
+<a href="packages.html">Packages</a> <br> Basic Skills <span
+class="glyphicon glyphicon-arrow-right"></span>
+<a href="plyr.html">plyr</a></p>
 
 
 
@@ -329,13 +422,59 @@ Help <span class="glyphicon glyphicon-arrow-right"></span> <a href="R_websites.h
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
