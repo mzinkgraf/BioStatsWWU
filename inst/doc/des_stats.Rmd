@@ -1,0 +1,153 @@
+---
+title: "Describing Data"
+author: "Ben Miner and Matthew Zinkgraf"
+date: '`r Sys.Date()`'
+output:
+  html_document:
+    toc: true
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{Describing Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteRender{all}
+---
+
+<form>
+ <input type="button" value="Back" onclick="history.back()">
+</form>
+
+<h1>Describing Data</h1>
+Although it is great to have data in R, we really want to do cool stuff with the data.  So, let's go over some of the basic descriptive statistics that we discussed in class. 
+
+# Measures of location
+## Arthimetic Mean
+Use the function <samp>mean()</samp> to calculate the mean of the data.
+
+```{r}
+ben.data <- read.csv("../inst/extdata/lengthdata.csv")
+mean(ben.data$Length)
+```
+
+## Geometric Mean
+There is not a function in the base package to calculate the geometric mean.  Below are two functions to calculate the geometric mean.  
+
+In the first function, we use the functions <code>prod()</code>, which multiplies all the values in <code>x</code> together, and <code>length()</code>, which determines how many values are in <code>x</code>.  Don't confuse the function <code>length()</code> with the name of the column, Length, in <code>ben.data</code>.  
+
+In the second function, the functions <code>exp()</code>, <code>mean()</code>, and <code>log()</code>.  They do what you would expect.   
+
+
+```{r}
+geo.mean1 <- function(x){
+  prod(x)^(1/length(x))
+}
+geo.mean2 <- function(x){
+  exp(mean(log(x)))
+}
+
+geo.mean1(ben.data$Length)
+geo.mean2(ben.data$Length)
+```
+
+## Harmonic Mean
+There is also not a function in the base package to calculate the harmonic mean.  Below is a functions to calculate the harmonic mean.  
+
+```{r}
+har.mean <- function(x){
+  length(x)/sum(1/x)
+}
+
+har.mean(ben.data$Length)
+```
+
+## Median
+Use the function <samp>median()</samp> to calculate the mean of the data.
+
+```{r}
+median(ben.data$Length)
+```
+
+## Mode
+There is not a function in the base packages to calculate the mode.  There is a function <samp>mode()</samp>, but it does something else.  There are different home-made functions you can find on the web.  Some are more complex than others and depend on extactly what you want to calculate.  The reason for this is that the mode often depends on how you bin your data. Think about the widths of the bars on a histogram and recall that you can make many narrow bars or a few wider bars, which will affect the mode.   
+
+Typically people will just determine the mode visually with a histogram.
+
+```{r}
+hist(ben.data$Length, col = "darkorchid4") #The mode is 3 if we use this histogram
+```
+
+However, if you are really just want to know the most common number in vector then you can use the following function.  
+
+```{r}
+mode <- function(x){
+  y <- sort(table(x),decreasing = T)
+  if(y[1] == y[2]) {  #Test whether there is more than one mode
+    print("There is more than 1 mode.  You should use a histogram to determine the mode")
+  } else {  #If there is only 1 mode, tell the user the mode
+    as.numeric(names(y)[1])
+  }
+}
+```
+
+# Measures of spread
+## Variance
+Use the function <samp>var()</samp> to calculate the variance of the data.
+
+```{r}
+var(ben.data$Length)
+```
+
+## Standard Deviation
+Use the function <samp>sd()</samp> to calculate the standard deviation of the data.
+
+```{r}
+sd(ben.data$Length)
+```
+
+## Standard Error
+There is not a function in the base packages to calculate the stanard error, but we can create a function to calculate the stardard error.  This is because standard error is really a standard deviation (of the distribution of means).
+
+```{r}
+se <- function(x) sd(x)/sqrt(length(x))
+se(ben.data$Length)
+```
+
+## Coefficient of variation
+There is also no function for the cv.  No problem, we can create our own function, just like we did for some of the means and standard error.  
+
+```{r}
+cv <- function(x) 100*(sd(x)/mean(x))
+cv(ben.data$Length)
+```
+
+## Quantiles or percentiles
+The function <samp>quantile()</samp> will calculate any quantile for you.  By default the function calculates the min, lower quartile, median, upper quartile, and max values.
+
+```{r}
+quantile(ben.data$Length)
+```
+
+You can also change the default values to calculate other quantiles.  
+
+```{r}
+quantile(ben.data$Length, probs = c(0.1, 0.25, 0.33, 0.66, 0.75, 0.9))
+```
+
+# Some Other Useful Functions
+There are a few more functions that can help you summarize data quickly in R.  The <samp>summary()</samp> function will summarize the data for an entire data.frame.  
+
+```{r}
+summary(ben.data)
+```
+
+The function <samp>boxplot()</samp> is a quick way to visual your data.  By default, the box represent the upper and lower quartiles (0.75 and 0.25 quantiles), and the line inside the box represents the median (0.5 quantile).  Now let me explain the whiskers--hold on to your pants.  Let's consider the upper whisker first.  The upper whisker is determined by calculating the difference between the upper and lower quartiles (i.e., the height of the box, also called the interquartile range).  Now if the max value is less than the interquartile range multiplied by 1.5 and added to the upper quartile, then the upper whisker represents the max value (and you will not see any additional data points).  If the max value is greater than the interquartile range multiplied by 1.5 and added to the upper quartile, then the upper whisker represents the interquartile range multiplied by 1.5 and added to the upper quartile, and you will see the data that exceed the upper whisker.  The lower whisker is plotted the same way but in reverse.      
+
+```{r}
+boxplot(ben.data$Length, col="orange")
+```
+
+Here is an example where the maximum and minimum values are more extreme than 1.5 the interquartile range.  Notice you see data points above and below the whiskers.  
+
+```{r}
+boxplot(rnorm(1000), col = "seagreen")
+```

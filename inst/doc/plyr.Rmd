@@ -1,0 +1,90 @@
+---
+title: "plyr"
+author: "Ben Miner and Matthew Zinkgraf"
+date: '`r Sys.Date()`'
+output:
+  html_document:
+    toc: true
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{plyr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteRender{all}
+---
+
+<form>
+ <input type="button" value="Back" onclick="history.back()">
+</form>
+
+<h1>Plyr Package</h1>
+
+The plyr package for R helps summarize data quickly.  For example, have you ever tried to calculate the means for a bunch of different groups in Excel; what a pain in the ass.  We have already learned the <samp>tapply()</samp> function, but it limits you to only one summary stat (e.g., the means for each group of interest).  The plyr package shines when you want to summarize several different stats.
+
+# Install and Load plyr
+
+Use the <samp>install.package()</samp> to install the package.  Then use either the <samp>library()</samp> or <samp>requires()</samp> functions to load the package.  Alternatively, in RStudio click on the Packages tab in the lower-right window, and then the Install button on the left-hand side just below the tabs.  Once the package is installed, just check the box next to the plyr package.  Remember you need to only install the package on a computer once, but need to load the package each time you restart R.  Look at the page on packages for more information.  
+
+```{r, eval=FALSE}
+  #If you have admin access
+  install.packages("plyr", dependencies=T)
+  require("plyr")
+
+  #If you don't have admin access
+  #And install the package to your u drive
+  install.packages("plyr", lib="u:/", dependencies=T)
+  require("plyr", lib.loc="u:/")
+```
+
+# ddply
+
+There many functions in this package, but I want to focus on the function <samp>ddply()</samp>.  This function take a data.frame, summarizes it, and returns a data.frame to the user.  There are other functions to summarize other data types, and you can even convert between data types. For example, the function <samp>laply()</samp> take a list, summarizes it, and returns an array.  
+
+The function <samp>ddply()</samp> requires several arguments.  The first is the data.frame that you want to summarize.  The second is the columns that you want to summarize by.  There is a bunch of data that R already installed on your computer, and we are going to just look at the <samp>iris</samp> data in R to see how this function works.  If you want to see all the data available in R, use the function <samp>data()</samp> without any arguments.  Here I load the the cars data and look at the structure of it.  
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+require(plyr)
+```
+
+```{r}
+  data(iris)
+  str(iris)
+```
+
+So, let us first just ask what was the average and standard deviation of rbi per team.  
+
+```{r}
+sepal.length.species <- ddply(iris, .(Species), summarise, 
+  mean.Sepal.Length = mean(Sepal.Length, na.rm = T),
+  sd.Sepal.Length = sd(Sepal.Length, na.rm = T)
+)
+sepal.length.species
+```
+
+I make up the names <samp>mean.Sepal.Length</samp> and <samp>sd.Sepal.Length</samp>.  If I wanted to caculate the variance, then I could add another argument of change one of the last two arguments.  Here I will just add another.  
+
+```{r}
+  sepal.length.species2 <- ddply(iris, .(Species), summarise, 
+    mean.Sepal.Length = mean(Sepal.Length, na.rm = T),
+    sd.Sepal.Length = sd(Sepal.Length, na.rm = T),
+    var.Sepal.Length = var(Sepal.Length, na.rm = T)
+  )
+sepal.length.species2
+```
+
+If there were more categorical variables in this data.frame, then we could summarize by them also.  To show you what I mean, let's add another factor to the iris data.frame.
+
+```{r}
+iris2 <- data.frame(iris, NewFactor = rep(c("Big", "Small"), length.out=iris))
+head(iris2)
+```
+
+Now let's summarize by species and the new factor we just created.  
+
+```{r}
+  sepal.length.species.newfac <- ddply(iris2, .(Species, NewFactor), summarise, 
+    mean.Sepal.Length = mean(Sepal.Length, na.rm = T),
+    sd.Sepal.Length = sd(Sepal.Length, na.rm = T)
+  )
+sepal.length.species.newfac
+```
