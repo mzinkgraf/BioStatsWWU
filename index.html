@@ -1,78 +1,70 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
-<meta charset="utf-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Ben Miner and Matthew Zinkgraf" />
 
+<meta name="date" content="2022-09-21" />
 
-<title></title>
+<title>Basic Graphing</title>
 
-<script src="inst/doc/libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="inst/doc/libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="inst/doc/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="inst/doc/libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="inst/doc/libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="inst/doc/libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="inst/doc/libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="inst/doc/libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="inst/doc/libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="inst/doc/libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="inst/doc/libs/navigation-1.1/tabsets.js"></script>
-<link href="inst/doc/libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
-<script src="inst/doc/libs/highlightjs-1.1/highlight.js"></script>
+<link href="inst/doc/libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="inst/doc/libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
 
 
-</head>
 
-<body>
+
+
 
 <style type = "text/css">
 .main-container {
@@ -80,64 +72,90 @@ h6 {
   margin-left: auto;
   margin-right: auto;
 }
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
 }
 </style>
 
 
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
-
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3,h4,h5",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -151,6 +169,12 @@ $(document).ready(function ()  {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -186,8 +210,6 @@ div.tocify {
 
 .tocify-subheader .tocify-item {
   font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
 }
 
 .tocify .list-group-item {
@@ -197,8 +219,18 @@ div.tocify {
 
 </style>
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -208,27 +240,22 @@ div.tocify {
 
 
 
+
 <br>
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-
+  
     <div class="navbar-header">
       <a class="navbar-brand" href="index.html">
-        Biostatistics (Biol 340)
+        Biometrics (Biol 340)
       </a>
     </div>
 
     <div>
       <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Weekly Labs
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="inst/doc/weekly_labs.html">Weekly Labs</a></li>
-          </ul>
-        </li>
-
+        <li><a href="inst/doc/weekly_labs.html">Weekly Labs</a></li>
+        
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Intro to R
           <span class="caret"></span></a>
@@ -251,7 +278,7 @@ div.tocify {
             <li><a href="inst/doc/prob_dist.html">Probability Distributions</a></li>
           </ul>
         </li>
-
+        
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Statistical Tests
           <span class="caret"></span></a>
@@ -263,7 +290,7 @@ div.tocify {
             <li><a href="inst/doc/reg_corr_test.html">Regression and Correlation</a></li>
           </ul>
         </li>
-
+          
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Graphing
           <span class="caret"></span></a>
@@ -275,7 +302,7 @@ div.tocify {
         </li>
       </ul>
     </div>
-
+ 
   </div>
 </nav>
 
