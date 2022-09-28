@@ -29,42 +29,8 @@ my.fac2 <- gl(2, 3, labels = c("Low", "High")) #Same as my.fac
 (my.frame2 <- data.frame(my.data = rnorm(6), my.factor = gl(2, 3))) 
 ```
 
-R does have some minimal user interface features.  One is a
-spreadsheet-like interface to enter or modify data in data.frames.
-To bring up this interface use the function <samp>edit()</samp>, where
-the data.frame of interest is the argument.  For example,
-let's modify the data in <samp>my.frame</samp>.
-
-```{r eval=FALSE}
-(my.frame.v2 <- edit(my.frame)) #Change the 1st value to 13
-```
-
-It is important to remember that you must assign a name to <samp>edit</samp>, or the changes are lost.  
-
-If you want to enter your data from scratch with this interface, use
-the following code.
-
-```{r eval=F}
-ben.frame.v3 <- edit(data.frame())
-```
-
-<div class="alert alert-warning">
-  If you have a Mac, the function <samp>edit()</samp> might not work because Apple got rid of X11 devices.  You can download X11 at the following website, which should fix the problem.
-</div>
-
-<a href="http://xquartz.macosforge.org/landing/">http://xquartz.macosforge.org/landing/</a>
 
 # Import Data
-## Copy and paste data with scan()
-Typically we don't want to enter data by hand, especially if it is already saved in Excel or another spreadsheet program.  Below are a couple of common ways to import data.  
-
-The function <samp>scan()</samp> is a quick way to import data as vectors.  Copy a row or column of numbers from Excel.  Then go to R and type the following.
-
-```{r eval=F}
-my.import <- scan()
-```
-
-Hit return, then "ctr v" to paste the values, and lastly hit return.  Your data are now saved as <samp>my.import</samp>.  
 
 ## Auto import with read.csv()
 The most common way people import data into R is with the functions <samp>read.table</samp> or <samp>read.csv</samp>.  We will use the latter and import data that was entered into Excel, but saved as a csv.  Create a data set in Excel.  Save the file as a csv
