@@ -17,6 +17,7 @@ vignette: >
 There are many ways to input data into R.  Below are examples of the most common ways.  
 
 # By hand
+
 This method is slow, and will only work for very small datasets.  The functions, <samp>c()</samp>, <samp>factor()</samp>, <samp>gl()</samp>, and <samp>data.frame()</samp> are the most commonly used to enter data, and can be used in combination.  
 
 ```{r}
@@ -72,7 +73,9 @@ tail(ben.data)
 ```
 
 Look at the help file for <samp>read.csv</samp> for other built-in functions, like <samp>read.table</samp>.  
+
 ## Auto import Excel files
+
 The new package <samp>readxl</samp> allows you to directly read in data from Excel.  This package works great, but because it is new you rarely see examples using it.  You will find lots of examples of users importing data with <samp>read.csv()</samp>.  However, this is rapidly changing, and you will want to practice reading data directly from Excel.  For example, I typically now just read in data directly from Excel--in the past I used the above methods and converted an Excel file to a csv file and imported the csv file.  You will need to install and then load the package <samp>readxl</samp> before you can use the <samp>read_excel()</samp> or <samp>excel_sheets</samp> functions.  See the page on installing packages for instructions (it is easy).  
 
 ```{r}
@@ -86,6 +89,7 @@ excel_sheets("../inst/extdata/lengthdata.xlsx")
 You can see that there is just one sheet, which is named "Data", in the Excel file <samp>lengthdata.xlsx</samp>.  
 
 # Retrieving Data
+
 Now that we have imported data into R in the form of a data.frame, we can pull out specific data, like all the data in a column.  There
 are two ways to do this.  Use single hard brackets to tell R you want a part of the object and within the bracket type the number (or vector of numbers) for the rows or columns you want to retrieve or type
 the name of the column surrounded with quotes (assuming it has a

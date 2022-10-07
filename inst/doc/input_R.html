@@ -350,12 +350,12 @@ my.fac2 &lt;- gl(2, 3, labels = c(&quot;Low&quot;, &quot;High&quot;)) #Same as m
 #rnorm() and gl() are &quot;inside&quot; data.frame()
 (my.frame2 &lt;- data.frame(my.data = rnorm(6), my.factor = gl(2, 3))) </code></pre>
 <pre><code>##      my.data my.factor
-## 1 -1.9225560         1
-## 2  0.2970422         1
-## 3 -1.7064317         1
-## 4 -0.7848404         2
-## 5  0.7413568         2
-## 6  2.4011533         2</code></pre>
+## 1 -0.2966516         1
+## 2 -0.4549107         1
+## 3 -0.4682982         1
+## 4 -1.8729634         2
+## 5  1.3342171         2
+## 6 -1.6658803         2</code></pre>
 </div>
 <div id="import-data" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Import Data</h1>
@@ -433,18 +433,22 @@ six rows of data in your data.frame, then use the functions
 ## 7     High      3
 ## 8     High      3</code></pre>
 <p>Look at the help file for <samp>read.csv</samp> for other built-in
-functions, like <samp>read.table</samp>.<br />
-## Auto import Excel files The new package <samp>readxl</samp> allows
-you to directly read in data from Excel. This package works great, but
-because it is new you rarely see examples using it. You will find lots
-of examples of users importing data with <samp>read.csv()</samp>.
-However, this is rapidly changing, and you will want to practice reading
-data directly from Excel. For example, I typically now just read in data
-directly from Excel–in the past I used the above methods and converted
-an Excel file to a csv file and imported the csv file. You will need to
-install and then load the package <samp>readxl</samp> before you can use
-the <samp>read_excel()</samp> or <samp>excel_sheets</samp> functions.
-See the page on installing packages for instructions (it is easy).</p>
+functions, like <samp>read.table</samp>.</p>
+</div>
+<div id="auto-import-excel-files" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Auto import Excel
+files</h2>
+<p>The new package <samp>readxl</samp> allows you to directly read in
+data from Excel. This package works great, but because it is new you
+rarely see examples using it. You will find lots of examples of users
+importing data with <samp>read.csv()</samp>. However, this is rapidly
+changing, and you will want to practice reading data directly from
+Excel. For example, I typically now just read in data directly from
+Excel–in the past I used the above methods and converted an Excel file
+to a csv file and imported the csv file. You will need to install and
+then load the package <samp>readxl</samp> before you can use the
+<samp>read_excel()</samp> or <samp>excel_sheets</samp> functions. See
+the page on installing packages for instructions (it is easy).</p>
 <pre class="r"><code>#install.packages(readxl) #Only needed if the package is not installed
 library(readxl)
 (ben.data2 &lt;- read_excel(&quot;../inst/extdata/lengthdata.xlsx&quot;)) #Same as ben.data</code></pre>
