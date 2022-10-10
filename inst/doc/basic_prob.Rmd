@@ -29,6 +29,11 @@ You can find information about installing and loading packages in the <a ref = "
 </div>
 
 ```{r, warning=FALSE, message=FALSE}
+#to install prob package and dependencies remove the # from the next 3 lines of code
+#install.packages("devtools", dependencies = TRUE)
+#install.packages("combinat")
+#devtools::install_github("mzinkgraf/prob")
+
 require("prob")
 ```
 

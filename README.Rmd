@@ -26,10 +26,11 @@ The BioStatsWWU Package can be installed from github:
 
 ```{r, eval = F}
     #install dependencies
-    install.packages(c("devtools","prob","plyr","reshape2","ggplot2"),
+    install.packages(c("devtools","combinat","plyr","reshape2","ggplot2"),
                      dependencies = TRUE)
 
     #install BiometricsWWU
+    devtools::install_github("mzinkgraf/prob")
     devtools::install_github("mzinkgraf/BioStatsWWU")
 ```
 

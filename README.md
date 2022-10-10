@@ -10,17 +10,20 @@ The BioStatsWWU Package can be installed from github:
 
 ``` r
     #install dependencies
-    install.packages(c("devtools","prob","plyr","reshape2","ggplot2"),
+    install.packages(c("devtools","combinat","plyr","reshape2","ggplot2"),
                      dependencies = TRUE)
 
     #install BiometricsWWU
+    devtools::install_github("mzinkgraf/prob")
     devtools::install_github("mzinkgraf/BioStatsWWU")
 ```
 
 ------------------------------------------------------------------------
 
-
 # Online Resources
 
-- [WWU Biometrics Website](https://mzinkgraf.github.io/BioStatsWWU/): This site is for students taking BIOL 340 or ESCI 340 Biostatistics class at Western Washington University.
-- <https://whitlockschluter3e.zoology.ubc.ca/>: Website of "The analysis of biological data" by Michael Whitlock and Dolph Schluter.
+-   [WWU Biometrics Website](https://mzinkgraf.github.io/BioStatsWWU/):
+    This site is for students taking BIOL 340 or ESCI 340 Biostatistics
+    class at Western Washington University.
+-   <https://whitlockschluter3e.zoology.ubc.ca/>: Website of “The
+    analysis of biological data” by Michael Whitlock and Dolph Schluter.
