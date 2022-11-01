@@ -513,7 +513,7 @@ g.test <- function(x, y = NULL, correct="williams",
   names(PARAMETER) <- "X-squared df"
   names(PVAL) <- "p.value"
   structure(list(statistic=STATISTIC,parameter=PARAMETER,p.value=PVAL,
-            method=METHOD,data.name=DNAME, observed=x, expected=E),
+            method=METHOD,data.name=DNAME, observed=x, expected=E, williams=q),
             class="htest")
 }
 ```

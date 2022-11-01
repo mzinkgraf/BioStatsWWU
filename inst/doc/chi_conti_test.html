@@ -11,7 +11,7 @@
 
 <meta name="author" content="Ben Miner and Matthew Zinkgraf" />
 
-<meta name="date" content="2022-09-21" />
+<meta name="date" content="2022-11-01" />
 
 <title>Chi-squared and G Contingency Tests</title>
 
@@ -319,7 +319,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Chi-squared and G Contingency Tests</h1>
 <h4 class="author">Ben Miner and Matthew Zinkgraf</h4>
-<h4 class="date">2022-09-21</h4>
+<h4 class="date">2022-11-01</h4>
 
 </div>
 
@@ -766,7 +766,7 @@ g.test &lt;- function(x, y = NULL, correct=&quot;williams&quot;,
   names(PARAMETER) &lt;- &quot;X-squared df&quot;
   names(PVAL) &lt;- &quot;p.value&quot;
   structure(list(statistic=STATISTIC,parameter=PARAMETER,p.value=PVAL,
-            method=METHOD,data.name=DNAME, observed=x, expected=E),
+            method=METHOD,data.name=DNAME, observed=x, expected=E, williams=q),
             class=&quot;htest&quot;)
 }</code></pre>
 </div>
