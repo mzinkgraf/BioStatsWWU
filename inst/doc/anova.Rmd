@@ -260,6 +260,7 @@ If you install and load the <samp>Hmisc</samp> package, then you can use <samp>s
 
 ```{r}
 #Requires the Hmisc package
+#install.packages("Hmisc") #select no
 #Plot standard deviation
 ggplot(iris, aes(x = Species, y = Sepal.Length)) +
   stat_summary(geom = "bar", fun.y = "mean") +
