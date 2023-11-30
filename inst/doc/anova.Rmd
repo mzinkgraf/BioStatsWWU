@@ -103,7 +103,7 @@ head(setosa)
 (setosa_lengths <- iris$Petal.Length[iris$Species == "setosa"])
 ```
 
-You should use these functions to calculate the sum of squares, mean squares, and F-ratio for these data.  I did not provide the code, so you can practice thinking about how to develop the code yourself, but make sure to ask if you are confused or get stuck!
+If you have time, you can modify these functions to calculate the sum of squares, mean squares, and F-ratio for these data.  I did not provide the code, so you can practice thinking about how to develop the code yourself, but make sure to ask if you are confused or get stuck!
 
 Let's now look at the F distribution, so we can convert a F-ratio to a P value.  
 
